@@ -17,9 +17,5 @@ public class Controller {
     public Controller (ProductRepository productRepository){
         this.productRepository = productRepository;
     }
-    @GetMapping("/")
-    public String showHomePage(Model model) {
-        model.addAttribute("products", productRepository.findAll());
-        return "/index";
-    }
+    
 }
