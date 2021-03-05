@@ -16,6 +16,8 @@ public class Product {
     private String name;
     
     private int price;
+
+    private String path;
     
     public Product(){
 
@@ -24,6 +26,7 @@ public class Product {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.path = path;
     }
     
 
@@ -68,11 +71,27 @@ public class Product {
     public void setPrice(int price) {
         this.price = price;
     }
+    /**
+     * @return String return the path
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * @param path the path to set
+     */
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     @Override
     public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", price=" + price + "]";
+        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", path=" + path +"]";
     }
+    
+
+
     
 
 }
