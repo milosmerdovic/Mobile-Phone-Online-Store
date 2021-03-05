@@ -56,11 +56,13 @@
 					<div th:case="*">
 						<div class="product-item">
 							<tbody>
-								<tr th:each="product :${products}">
-									<td th:text="${product.path}"></td>
-									<td th:text="${product.name}"></td>
-									<td th:text="${product.price}"></td>
-								</tr>
+							<tr th:each="product :${products}">
+								<td>
+									<img th:src="${product.path}"><br/>
+									[[${product.name}]]<br/>
+									[[${product.price}]]
+								</td>
+							</tr>
 							</tbody>
 						</div>
 					</div>
