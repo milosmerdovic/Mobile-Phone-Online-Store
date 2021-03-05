@@ -54,14 +54,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="product-item">
-						<img src="images/product1.png" width="190" height="250" alt="">
-						<tbody>
-							<tr th:each="product :${products}">
-								<td th:text="${product.name}"></td>
-								<td th:text="${product.price}"></td>
-							</tr>
-						</tbody>
+					<h4 th:case="null">No data</h4>
+					<div th:case="*">
+						<div class="product-item">
+							<img src="images/product1.png" width="190" height="250" alt="">
+							<tbody>
+								<tr th:each="product :${products}">
+									<td th:text="${product.name}"></td>
+									<td th:text="${product.price}"></td>
+								</tr>
+							</tbody>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
