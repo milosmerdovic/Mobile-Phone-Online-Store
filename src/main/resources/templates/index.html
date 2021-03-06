@@ -49,42 +49,19 @@
 </div>
 <div th:switch="${products}" class="newest-products-section">
 	<h3>All Products</h3>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<h4 th:case="null">No data</h4>
+		<div class="grid-container">
+				<h4 th:case="null">No data</h4>
 					<div th:case="*">
-						<div class="product-item">
-							<tbody>
-							<tr th:each="product :${products}">
+						<div class="grid-item" th:each="product :${products}">
+							<!-- <tr th:each="product :${products}"> -->
 								<td>
 									<img th:src="${product.path}"><br/>
 									[[${product.name}]]<br/>
 									[[${product.price}]]
 								</td>
-							</tr>
-							</tbody>
+							<!-- </tr> -->
 						</div>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="product-item">
-						<img src="images/product2.png" width="190" height="260" alt="">
-						<h4>Iphone XS Max Pro</h4>
-						<p>Product 2</p>
-						<a href="#">Specifications</a>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="product-item">
-						<img src="images/product3.png" width="250" height="260" alt="">
-						<h4>Iphone XS Max Pro</h4>
-						<p>Product 3</p>
-						<a href="#">Specifications</a>
-					</div>
-				</div>
-			</div>
-
 		</div>
 </div>
 <footer>

@@ -81,29 +81,18 @@ body{
     padding-bottom: 115px;
     padding-top: 115px;
 }
+.newest-products-section .grid-container {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+  }
 
-/* ---Specifications--- */
 
-.newest-products-section .product-item a {
+.newest-products-section .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
     text-align: center;
-    border: antiquewhite;
-    color: #f9f9f9;
-}
-/* ---Shadow, hover and background--- */
-
-.newest-products-section .product-item {
-    background: #2c619e;
-    text-align: center;
-    box-shadow: 10px 10px 10px rgb(102, 144, 199);
-    padding-bottom: 40px;
-    transition: 0.3s;
-}
-
-.newest-products-section .product-item:hover {
-    background-color: #417dc2; 
-    margin-top: -20px;           
-}
-.footer {
-    background-color: #fa6540;
-    height: 60px;
-}
+  }
