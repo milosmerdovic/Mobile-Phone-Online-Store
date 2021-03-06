@@ -2,6 +2,11 @@
     margin: 0;
     padding: 0;
 }
+img {
+    vertical-align: middle;
+    border-style: none;
+    width: 15%;
+}
 body{
     background-color: #f9f9f9;
 }
@@ -16,6 +21,7 @@ body{
 .pre-header .logo img {
     margin-top: -10px;
     margin-bottom: 10px;
+    width: 11%;
 }
 .pre-header .logo {
     display: inline-flex;
@@ -81,14 +87,14 @@ body{
     padding-bottom: 115px;
     padding-top: 115px;
 }
+/* Grid Container  */
 .newest-products-section .grid-container {
     display: inline-grid;
     grid-template-columns: auto auto auto;
     background-color: #2196F3;
     padding: 10px;
   }
-
-
+ /* Grid item */
 .newest-products-section .grid-item {
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
@@ -96,3 +102,11 @@ body{
     font-size: 30px;
     text-align: center;
   }
+.footer {
+    height: 60px;
+    background-color: #fa6540;
+    color: #343a40;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 5px;
+}

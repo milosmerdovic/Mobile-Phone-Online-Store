@@ -26,7 +26,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<ul class="first-menu">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Contact</a></li>
@@ -53,13 +53,11 @@
 				<h4 th:case="null">No data</h4>
 					<div th:case="*">
 						<div class="grid-item" th:each="product :${products}">
-							<!-- <tr th:each="product :${products}"> -->
 								<td>
 									<img th:src="${product.path}"><br/>
 									[[${product.name}]]<br/>
-									[[${product.price}]]
+									<p>[[${product.price}]] e</p>
 								</td>
-							<!-- </tr> -->
 						</div>
 					</div>
 		</div>
@@ -68,9 +66,7 @@
 	<div class="footer">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
-
-				</div>
+					<p>Feel free to contact us about buying products <br/> mail: info@gmail.com</p>
 			</div>
 		</div>
 	</div>
