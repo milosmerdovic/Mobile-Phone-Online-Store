@@ -14,7 +14,7 @@ body{
 .pre-header{
     background-color: #fa6540;
     height: 60px;
-    color: white;
+    color: #343a40;
     padding-top: 15px;
 }
 /*Logo content*/
@@ -34,7 +34,7 @@ body{
     margin-left: 10px;
 }
 .pre-header .first-menu li a{
-    color: white;
+    color: #343a40;
     text-transform: uppercase;
 }
 .pre-header .first-menu {
@@ -91,7 +91,7 @@ body{
 .newest-products-section .grid-container {
     display: inline-grid;
     grid-template-columns: auto auto auto;
-    background-color: #2196F3;
+    background-color: #6ca698;
     padding: 10px;
   }
  /* Grid item */

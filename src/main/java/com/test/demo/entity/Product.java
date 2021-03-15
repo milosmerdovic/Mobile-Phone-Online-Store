@@ -1,97 +1,81 @@
 package com.test.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
     
+    @Column(name = "price", nullable = false)
+    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
     private int price;
+    
+    @Column(name = "quantity", nullable = false)
+    @Min(value = 0, message = "*Quantity has to be non negative number")
+    private Integer quantity;
 
     private String path;
     
     public Product(){
 
     }
-    public Product(int id,String name, String path, int price){
+    public Product(int id,String name, String path, int price, int quantity){
         this.id = id;
         this.name = name;
         this.price = price;
         this.path = path;
+        this.quantity = quantity;
     }
     
 
-    /**
-     * @return int return the id
-     */
     public int getId() {
         return id;
     }
-
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return String return the name
-     */
     public String getName() {
         return name;
     }
-
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return int return the price
-     */
     public int getPrice() {
         return price;
     }
-
-    /**
-     * @param price the price to set
-     */
     public void setPrice(int price) {
         this.price = price;
     }
-    /**
-     * @return String return the path
-     */
+    
     public String getPath() {
         return path;
     }
-
-    /**
-     * @param path the path to set
-     */
     public void setPath(String path) {
         this.path = path;
+    }
+    public int getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
     public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", path=" + path +"]";
+        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", path=" + path + ", quantity=" + quantity +
+        "]";
     }
-    
-
-
-    
+     
 
 }
