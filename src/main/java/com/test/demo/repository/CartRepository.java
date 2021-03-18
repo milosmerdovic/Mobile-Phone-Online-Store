@@ -14,9 +14,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CartRepository extends CrudRepository <CartItem, Integer> {
     
-    public List <CartItem> findByUser(User user);
-    Map <Product, Integer> getProductsInCart();
-    void addProduct(Product product);
-    void removeProduct(Product product);
-    BigDecimal getTotal();
+    // public List <CartItem> findByUser(User user);
+    // public Map <Product, Integer> getProductsInCart();
+    // public void addProduct(Product product);
+    // public void removeProduct(Product product);
+    // BigDecimal getTotal();
+    
+          
 }

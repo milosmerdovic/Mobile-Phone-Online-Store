@@ -45,7 +45,6 @@
 		<div class="row">
 				<h1>Welcome to mobile sales page</h1>
 				<p>Every tuesday sales on chosen products!</p>
-				<a href="#">Discounts</a>
 		</div>
 	</div>
 </div>
@@ -59,7 +58,9 @@
 									<img th:src="${product.path}"><br/>
 									[[${product.name}]]<br/>
 									<p>[[${product.price}]] e</p>
-									<a th:href="@{/addProduct{id}(id={product.id})}" class="btn btn-primary"><i class="fas fa-shopping-cart"></i></a>
+									<!-- <a th:href="@{/addProduct/{id}(id={product.id})}" class="btn btn-primary"><i class="fas fa-shopping-cart"></i></a> -->
+									<!-- <i class="fas fa-shopping-cart"></i> -->
+									<button type="button" class="btn btn-primary"><i class = "fas fa-shopping-cart"> Add to cart</i></button>
 								</td>
 						</div>
 					</div>
