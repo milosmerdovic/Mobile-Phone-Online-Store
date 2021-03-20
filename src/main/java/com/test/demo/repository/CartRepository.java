@@ -16,7 +16,7 @@ public interface CartRepository extends CrudRepository <CartItem, Integer> {
     
     // public List <CartItem> findByUser(User user);
     // public Map <Product, Integer> getProductsInCart();
-    // public void addProduct(Product product);
+    // void addProduct(Product product);
     // public void removeProduct(Product product);
     // BigDecimal getTotal();
     

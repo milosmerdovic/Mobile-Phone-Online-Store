@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @SpringBootConfiguration
-@SpringBootApplication
+@SpringBootApplication()
 public class DemoApplication {
 
 	public static void main(String[] args) {
