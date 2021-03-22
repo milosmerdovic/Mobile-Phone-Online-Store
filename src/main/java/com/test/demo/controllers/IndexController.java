@@ -27,8 +27,8 @@ public class IndexController {
         logger.info("Info log message:" + model.getAttribute("products").toString());
         return "/index";
     }
-    // @RequestMapping("/login")
-    // public String loginPage(){
-    //     return "login";
-    // }
+    @RequestMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
 }

@@ -23,8 +23,8 @@ public class ShoppingCartController {
         this.productRepository = productRepository;
     }
     @GetMapping("/index/addToShoppingCart/{id}")
-    public String addProduct(@PathVariable("id") int id, Model model){
-        model.addAttribute("products", productRepository.findById(id));
+    public String addProduct(@PathVariable("id") int id){
+        productRepository.findById(id).ifPresent(cartRepository::addProduct);
         return "/index";
     }
     // @GetMapping("/cart")

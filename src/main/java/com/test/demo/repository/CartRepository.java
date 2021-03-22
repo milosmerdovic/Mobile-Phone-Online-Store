@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CartRepository extends CrudRepository <CartItem, Integer> {
-    
+    void findProductById(Product product);
     // public List <CartItem> findByUser(User user);
     // public Map <Product, Integer> getProductsInCart();
-    // void addProduct(Product product);
+    public void addProduct(Product product);
     // public void removeProduct(Product product);
     // BigDecimal getTotal();
     
