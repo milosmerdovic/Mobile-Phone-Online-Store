@@ -27,6 +27,13 @@ public class IndexController {
         logger.info("Info log message:" + model.getAttribute("products").toString());
         return "/index";
     }
+
+    // @RequestMapping("/index/addToShoppingCart/{id}")
+    // public String addToShoppingCart(Model model){
+    //     model.addAttribute("products", productRepository.findById(product));       
+    //     return "/index";
+    // }
+
     @RequestMapping("/login")
     public String loginPage(){
         return "login";

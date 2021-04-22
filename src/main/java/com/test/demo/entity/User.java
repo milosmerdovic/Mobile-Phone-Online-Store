@@ -32,7 +32,7 @@ public class User {
     private String password;
 
     @Column(name = "username", nullable = false, unique = true)
-    @Length(min = 5, message = "*Your username must have at least 5 characters")
+    @Length(min = 3, message = "*Your username must have at least 3 characters")
     @NotEmpty(message = "*Please provide your name")
     private String username;
 
@@ -40,7 +40,7 @@ public class User {
     @NotEmpty(message = "*Please provide your name")
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "lastName")
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
 
@@ -48,7 +48,7 @@ public class User {
     private int active;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Collection<Role> roles;
 
     public User (){

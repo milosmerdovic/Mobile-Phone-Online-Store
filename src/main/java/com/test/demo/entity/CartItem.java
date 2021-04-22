@@ -9,22 +9,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cart_item")
+@Table(name = "cartItem")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "productId")
     private Product product;
     
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     private int quantity;
+
+    public CartItem(){}
     
+    public CartItem(int id, Product product, User user, int quantity){
+        this.id = id;
+        this.product = product;
+        this.user = user;
+        this.quantity = quantity;
+    }
+
     public int getId() {
         return id;
     }
