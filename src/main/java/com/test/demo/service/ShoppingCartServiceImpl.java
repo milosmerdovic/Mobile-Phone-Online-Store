@@ -50,12 +50,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         return Collections.unmodifiableMap(cart);
     }
 
-    @Override
-    public BigDecimal totalPrice() {
-        cart.entrySet().stream().map(k -> k.getKey().getPrice().multiply(BigDecimal.valueOf(k.getValue()))).sorted()
-        .reduce(BigDecimal::add)
-        .orElse(BigDecimal.ZERO);
-    }
+    // @Override
+    // public BigDecimal totalPrice() {
+    //     cart.entrySet().stream().map(k -> k.getKey().getPrice().multiply(BigDecimal.valueOf(k.getValue()))).sorted()
+    //     .reduce(BigDecimal::add)
+    //     .orElse(BigDecimal.ZERO);
+    // }
 
     @Override
     public void checkout() {

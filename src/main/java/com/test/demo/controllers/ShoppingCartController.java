@@ -28,19 +28,19 @@ public class ShoppingCartController {
     @GetMapping("/cart")
     public String cart(Model model){
         model.addAttribute("products", shoppingCartService.productsInCart());
-        model.addAttribute("totalPrice", shoppingCartService.totalPrice());
+        // model.addAttribute("totalPrice", shoppingCartService.totalPrice());
 
         return "cart";
     }
 
-    @GetMapping("/index/addToShoppingCart/{id}")
+    @GetMapping("/addToShoppingCart/{id}")
     public String addProductToCart(@PathVariable("id") Integer id){
         Product product = productService.findById(id);
         if (product != null){
             shoppingCartService.addProduct(product);
             logger.debug(String.format("Product with id: %s added to shopping cart.", id));
         }
-        return "redirect:/home";
+        return "index";
     }
     
     // @RequestMapping("/cart")
