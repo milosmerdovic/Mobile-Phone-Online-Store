@@ -34,13 +34,13 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/addToShoppingCart/{id}")
-    public String addProductToCart(@PathVariable("id") Integer id){
+    public String addProductToCart(@PathVariable("id") int id){
         Product product = productService.findById(id);
         if (product != null){
             shoppingCartService.addProduct(product);
             logger.debug(String.format("Product with id: %s added to shopping cart.", id));
         }
-        return "index";
+        return "/index";
     }
     
     // @RequestMapping("/cart")
