@@ -10,7 +10,7 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
           integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	</head>
 
 <body>
@@ -21,8 +21,7 @@
 				
 				<div class="col-md-6">
 					<div class="logo">
-						<img src="images/log.png" width="50" height="50" alt="logo">
-						<p>Mobile Shop</p>
+						<a href="/"><img src="images/log.png" width="50" height="50" alt="logo">Mobile page</p></a>
 					</div>
 				</div>
 
@@ -58,7 +57,7 @@
 									<img th:src="${product.path}"><br/>
 									[[${product.name}]]<br/>
 									<p>[[${product.price}]] e</p>
-									<a th:href="@{addToShoppingCart/{id}(id=${product.id})}" class="btn btn-primary"><i class = "fas fa-shopping-cart"> Add to cart</i></a>
+									<a th:href="@{/addToShoppingCart/{id}(id=${product.id})}" class="btn btn-primary"><i class = "fas fa-shopping-cart"> Add to cart</i></a>
 								</td>
 						</div>
 					</div>
