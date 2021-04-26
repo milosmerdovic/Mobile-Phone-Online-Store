@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -23,11 +22,11 @@ public class IndexController {
     public IndexController (ProductRepository productRepository){
         this.productRepository = productRepository;
     }
-    @RequestMapping("/")
+    @GetMapping({"/", "/index", "/home"})
     public String showAllProducts(Model model){
         model.addAttribute("products", productRepository.findAll());
         logger.info("Info log message:" + model.getAttribute("products").toString());
-        return "/index";
+        return "index";
     }
 
     // @RequestMapping("/index/addToShoppingCart/{id}")
@@ -36,7 +35,7 @@ public class IndexController {
     //     return "/index";
     // }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String loginPage(){
         return "login";
     }
