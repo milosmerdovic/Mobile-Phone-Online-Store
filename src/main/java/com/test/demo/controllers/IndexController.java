@@ -1,5 +1,7 @@
 package com.test.demo.controllers;
 
+import java.security.Principal;
+
 import com.test.demo.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +38,13 @@ public class IndexController {
     // }
 
     @GetMapping("/login")
-    public String loginPage(){
-        return "login";
+    public String login(Principal principal) {
+        if (principal != null) {
+            return "redirect:/home";
+        }
+        return "/login";
     }
+    
     @GetMapping("/register")
     public String register() {
         return "register";

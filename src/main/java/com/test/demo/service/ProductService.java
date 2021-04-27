@@ -7,9 +7,9 @@ import com.test.demo.entity.Product;
 public interface ProductService {
 
     void save(Product product);
-    void edit(int id, Product newProduct);
-    void delete(int id);
-    Product findById(int id);
+    void edit(Long id, Product product);
+    void delete(Long id);
+    Product findById(Long id);
     List<Product> findAllByOrderByIdAsc();
-    Integer count();
+    Long count();
 }

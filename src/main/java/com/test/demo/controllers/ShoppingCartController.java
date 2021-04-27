@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ShoppingCartController {
@@ -43,8 +44,33 @@ public class ShoppingCartController {
         return "/index";
     }
     
-    // @RequestMapping("/cart")
-    // public String showCart(){
-    //     return "cart";
-    // }
+
+    @GetMapping("/shoppingCart")
+    public ModelAndView shoppingCart() {
+        ModelAndView modelAndView = new ModelAndView("/shoppingCart");
+        modelAndView.addObject("products", shoppingCartService.productsInCart());
+        return modelAndView;
+    }
+
+    @GetMapping("/shoppingCart/addProduct/{productId}")
+    public ModelAndView addProductToCart(@PathVariable("productId") Long productId) {
+        productService.findById(productId).ifPresent(shoppingCartService::addProduct);
+        return shoppingCart();
+    }
+
+    @GetMapping("/shoppingCart/removeProduct/{productId}")
+    public ModelAndView removeProductFromCart(@PathVariable("productId") Long productId) {
+        productService.findById(productId).ifPresent(shoppingCartService::removeProduct);
+        return shoppingCart();
+    }
+
+    @GetMapping("/shoppingCart/checkout")
+    public ModelAndView checkout() {
+        try {
+            shoppingCartService.checkout();
+        } catch (NotEnoughProductsInStockException e) {
+            return shoppingCart().addObject("outOfStockMessage", e.getMessage());
+        }
+        return shoppingCart();
+    }
 }

@@ -15,17 +15,16 @@
 
 <body>
 <header>
-	<div  class="pre-header">
+	<div class="pre-header">
 		<div class="container">
 			<div class="row">
-				
 				<div class="col-md-6">
 					<div class="logo">
 						<a href="/"><img src="images/log.png" width="50" height="50" alt="logo">Mobile page</p></a>
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<ul class="first-menu">
 						<li><a href="/">Home</a></li>
 						<li><a href="/login">Login</a></li>
@@ -57,7 +56,8 @@
 									<img th:src="${product.path}"><br/>
 									[[${product.name}]]<br/>
 									<p>[[${product.price}]] e</p>
-									<a th:href="@{/addToShoppingCart/{id}(id=${product.id})}" class="btn btn-primary"><i class = "fas fa-shopping-cart"> Add to cart</i></a>
+									<td><a th:href="@{/addToShoppingCart/{id}(id=${product.id})}" class="btn btn-primary">
+										<i class = "fas fa-shopping-cart"> Add to cart</i></a></td>
 								</td>
 						</div>
 					</div>

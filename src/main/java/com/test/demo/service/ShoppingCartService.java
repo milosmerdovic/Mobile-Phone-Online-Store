@@ -11,6 +11,6 @@ public interface ShoppingCartService {
     void removeProduct(Product product);
     void clearProducts();
     Map <Product, Integer> productsInCart();
-    // BigDecimal totalPrice();
+    BigDecimal totalPrice();
     void checkout();
 }

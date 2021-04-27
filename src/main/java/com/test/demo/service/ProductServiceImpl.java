@@ -23,21 +23,16 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void edit(int id, Product newProduct) {
+    public void edit(Long id, Product product) {
         Product found = productRepository.getOne(id);
-        found.setName(newProduct.getName());
-        found.setPrice(newProduct.getPrice());
-        save(newProduct);
+        found.setName(product.getName());
+        found.setPrice(product.getPrice());
+        save(product);
     }
 
     @Override
-    public void delete(int id) {
-        productRepository.delete(findById(id));
-    }
-
-    @Override
-    public Product findById(int id) {
-        return productRepository.findById(id);
+    public void delete(Long id) {
+        productRepository.deleteById(id);
     }
 
     @Override
@@ -46,8 +41,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Integer count() {
-        return (int) productRepository.count();
+    public Long count() {
+        return productRepository.count();
+    }
+
+    @Override
+    public Product findById(Long id) {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 }
