@@ -10,7 +10,7 @@ public interface ShoppingCartService {
     void addProduct(Product product);
     void removeProduct(Product product);
     void clearProducts();
-    Map <Product, Integer> productsInCart();
+    Map <Product, Long> productsInCart();
     BigDecimal totalPrice();
     void checkout();
 }

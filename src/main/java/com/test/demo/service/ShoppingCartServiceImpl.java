@@ -2,6 +2,7 @@ package com.test.demo.service;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,49 +19,51 @@ import org.springframework.web.context.WebApplicationContext;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
    
-    private Map<Product, Integer> cart = new LinkedHashMap<>();
+    // private Map<Product, Long> cart = new LinkedHashMap<>();
+    private Map<Product, Long> products = new HashMap<>();
 
     @Override
     public void addProduct(Product product) {
-        if (cart.containsKey(product)){
-            cart.replace(product, cart.get(product) + 1);
+        if (products.containsKey(product)){
+            products.replace(product, products.get(product) + 1);
         }else{
-            cart.put(product, 1);
+            products.put(product, (long) 1);
         }
     }
 
     @Override
     public void removeProduct(Product product) {
-        if (cart.containsKey(product)) {
-            if (cart.get(product) > 1)
-                cart.replace(product, cart.get(product) - 1);
-            else if (cart.get(product) == 1) {
-                cart.remove(product);
+        if (products.containsKey(product)) {
+            if (products.get(product) > 1)
+                products.replace(product, products.get(product) - 1);
+            else if (products.get(product) == 1) {
+                products.remove(product);
             }
         }
     }
 
     @Override
     public void clearProducts() {
-        cart.clear();
+        products.clear();
     }
 
     @Override
-    public Map<Product, Integer> productsInCart() {
-        return Collections.unmodifiableMap(cart);
+    public Map<Product, Long> productsInCart() {
+        return Collections.unmodifiableMap(products);
     }
 
-    // @Override
-    // public BigDecimal totalPrice() {
-    //     cart.entrySet().stream().map(k -> k.getKey().getPrice().multiply(BigDecimal.valueOf(k.getValue()))).sorted()
-    //     .reduce(BigDecimal::add)
-    //     .orElse(BigDecimal.ZERO);
-    // }
+     @Override
+     public BigDecimal totalPrice() {
+         products.entrySet().stream()
+         .map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue()))).sorted()
+         .reduce(BigDecimal :: add)
+         .orElse(BigDecimal.ZERO);
+     }
 
     @Override
     public void checkout() {
         // TODO Auto-generated method stub
-        cart.clear();
+        products.clear();
     }
     
 

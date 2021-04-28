@@ -1,6 +1,7 @@
 package com.test.demo.controllers;
 
 import com.test.demo.entity.Product;
+import com.test.demo.exception.NotEnoughProductsInCartException;
 import com.test.demo.service.ProductService;
 import com.test.demo.service.ShoppingCartService;
 
@@ -26,41 +27,23 @@ public class ShoppingCartController {
         this.productService = productService;
     }
     
+
     @GetMapping("/cart")
-    public String cart(Model model){
-        model.addAttribute("products", shoppingCartService.productsInCart());
-        // model.addAttribute("totalPrice", shoppingCartService.totalPrice());
-
-        return "cart";
-    }
-
-    @GetMapping("/addToShoppingCart/{id}")
-    public String addProductToCart(@PathVariable("id") int id){
-        Product product = productService.findById(id);
-        if (product != null){
-            shoppingCartService.addProduct(product);
-            logger.debug(String.format("Product with id: %s added to shopping cart.", id));
-        }
-        return "/index";
-    }
-    
-
-    @GetMapping("/shoppingCart")
     public ModelAndView shoppingCart() {
-        ModelAndView modelAndView = new ModelAndView("/shoppingCart");
+        ModelAndView modelAndView = new ModelAndView("/cart");
         modelAndView.addObject("products", shoppingCartService.productsInCart());
         return modelAndView;
     }
 
-    @GetMapping("/shoppingCart/addProduct/{productId}")
-    public ModelAndView addProductToCart(@PathVariable("productId") Long productId) {
-        productService.findById(productId).ifPresent(shoppingCartService::addProduct);
+    @GetMapping("/index/addProduct/{id}")
+    public ModelAndView addProductToCart(@PathVariable("id") Long id) {
+        productService.findById(id).ifPresent(shoppingCartService::addProduct);
         return shoppingCart();
     }
 
-    @GetMapping("/shoppingCart/removeProduct/{productId}")
-    public ModelAndView removeProductFromCart(@PathVariable("productId") Long productId) {
-        productService.findById(productId).ifPresent(shoppingCartService::removeProduct);
+    @GetMapping("/cart/removeProduct/{id}")
+    public ModelAndView removeProductFromCart(@PathVariable("id") Long id) {
+        productService.findById(id).ifPresent(shoppingCartService::removeProduct);
         return shoppingCart();
     }
 
@@ -68,7 +51,7 @@ public class ShoppingCartController {
     public ModelAndView checkout() {
         try {
             shoppingCartService.checkout();
-        } catch (NotEnoughProductsInStockException e) {
+        } catch (NotEnoughProductsInCartException e) {
             return shoppingCart().addObject("outOfStockMessage", e.getMessage());
         }
         return shoppingCart();
