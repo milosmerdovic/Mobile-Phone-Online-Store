@@ -1,6 +1,7 @@
 package com.test.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.test.demo.entity.Product;
 import com.test.demo.repository.ProductRepository;
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product findById(Long id) {
+    public Optional<Product> findById(Long id) {
         // TODO Auto-generated method stub
         return null;
     }

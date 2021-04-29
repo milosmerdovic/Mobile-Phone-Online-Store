@@ -3,7 +3,6 @@ package com.test.demo.service;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.test.demo.entity.Product;
@@ -19,7 +18,6 @@ import org.springframework.web.context.WebApplicationContext;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
    
-    // private Map<Product, Long> cart = new LinkedHashMap<>();
     private Map<Product, Long> products = new HashMap<>();
 
     @Override
@@ -54,7 +52,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
      @Override
      public BigDecimal totalPrice() {
-         products.entrySet().stream()
+         return products.entrySet().stream()
          .map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue()))).sorted()
          .reduce(BigDecimal :: add)
          .orElse(BigDecimal.ZERO);

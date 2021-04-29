@@ -1,5 +1,7 @@
 package com.test.demo.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
@@ -17,7 +19,7 @@ public class Product {
     
     @Column(name = "price", nullable = false)
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
-    private int price;
+    private BigDecimal price;
     
     @Column(name = "quantity", nullable = false)
     @Min(value = 0, message = "*Quantity has to be non negative number")
@@ -28,7 +30,7 @@ public class Product {
     public Product(){
 
     }
-    public Product(long id, String name, String path, int price, int quantity){
+    public Product(long id, String name, String path, BigDecimal price, int quantity){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -51,10 +53,10 @@ public class Product {
         this.name = name;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     
