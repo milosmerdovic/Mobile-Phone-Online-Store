@@ -30,17 +30,4 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login(Principal principal) {
-        if (principal != null) {
-            return "redirect:/home";
-        }
-        return "/login";
-    }
-    
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
-    
 }
