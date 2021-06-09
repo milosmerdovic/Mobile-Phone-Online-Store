@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en-us">
+<html xmlns:th="http://www.thymeleaf.org" lang="en-us">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -28,8 +28,7 @@
 					<ul class="first-menu">
 						<li><a href="/">Home</a></li>
 						<li><a href="/login">Login</a></li>
-						<li><a href="/register">Register</a></li>
-						<li><a href="/cart">Cart</a></li>
+						<li><a href="/shoppingCart">Cart</a></li>
 					</ul>
 				</div>
 
@@ -55,9 +54,10 @@
 								<td>
 									<img th:src="${product.path}"><br/>
 									[[${product.name}]]<br/>
-									<p>[[${product.price}]] e</p>
-									<td><a th:href="@{/index/addProduct/{id}(id=${product.id})}" class="btn btn-primary">
-										<i class = "fas fa-shopping-cart"> Add to cart</i></a></td>
+									<p>[[${product.price}]] e</p></br>
+									<div th:inline="text" >In Stock: [[${product.quantity}]]</div>
+									<a th:href="@{/shoppingCart/addProduct/{id}(id=${product.id})}" class="btn btn-primary" th:if="${product.quantity}>0" >
+										<i class = "fas fa-shopping-cart"> Add to cart</i></a>
 								</td>
 						</div>
 					</div>

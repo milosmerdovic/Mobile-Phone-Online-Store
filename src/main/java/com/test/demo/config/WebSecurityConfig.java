@@ -15,19 +15,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure (HttpSecurity http) throws Exception{
         http
             .authorizeRequests()
-                    .antMatchers("/", "/index", "/home", "/registration").permitAll()
+                    .antMatchers("/", "/index", "/home", "/login").permitAll()
                     .anyRequest().authenticated()
                     .and()
             .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/")
                     .permitAll()
                     .and()
             .logout()
                     .permitAll();
     }
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 }

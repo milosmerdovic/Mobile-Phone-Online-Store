@@ -1,6 +1,6 @@
 package com.test.demo.controllers;
 
-// import com.test.demo.exception.NotEnoughProductsInCartException;
+import com.test.demo.exception.NotEnoughProductsInCartException;
 import com.test.demo.service.ProductService;
 import com.test.demo.service.ShoppingCartService;
 
@@ -23,32 +23,34 @@ public class ShoppingCartController {
     }
     
 
-    @GetMapping("/cart")
+    @GetMapping("/shoppingCart")
     public ModelAndView shoppingCart() {
-        ModelAndView modelAndView = new ModelAndView("/cart");
+        ModelAndView modelAndView = new ModelAndView("/shoppingCart");
         modelAndView.addObject("products", shoppingCartService.productsInCart());
+        modelAndView.addObject("total", shoppingCartService.totalPrice().toString());
         return modelAndView;
     }
 
-    @GetMapping("/index/addProduct/{id}")
-    public ModelAndView addProductToCart(@PathVariable("id") Long id) {
+    @GetMapping("/shoppingCart/addProduct/{id}")
+    public String addProductToCart(@PathVariable("id") Long id) {
         productService.findById(id).ifPresent(shoppingCartService::addProduct);
-        return shoppingCart();
+        return "redirect:/shoppingCart";
     }
 
-    @GetMapping("/cart/removeProduct/{id}")
-    public ModelAndView removeProductFromCart(@PathVariable("id") Long id) {
+    @GetMapping("/shoppingCart/removeProduct/{id}")
+    public String removeProductFromCart(@PathVariable("id") Long id) {
         productService.findById(id).ifPresent(shoppingCartService::removeProduct);
+        return "redirect:/shoppingCart";
+    }
+
+    @GetMapping("/shoppingCart/checkout")
+    public ModelAndView checkout() {
+        try {
+            shoppingCartService.checkout();
+        } catch (NotEnoughProductsInCartException e) {
+            return shoppingCart().addObject("outOfStockMessage", e.getMessage());
+        }
         return shoppingCart();
     }
 
-    // @GetMapping("/shoppingCart/checkout")
-    // public ModelAndView checkout() {
-    //     try {
-    //         shoppingCartService.checkout();
-    //     } catch (NotEnoughProductsInCartException e) {
-    //         return shoppingCart().addObject("outOfStockMessage", e.getMessage());
-    //     }
-    //     return shoppingCart();
-    // }
 }

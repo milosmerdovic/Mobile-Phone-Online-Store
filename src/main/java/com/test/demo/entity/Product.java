@@ -12,7 +12,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -27,22 +27,11 @@ public class Product {
 
     private String path;
     
-    public Product(){
-
-    }
-    public Product(long id, String name, String path, BigDecimal price, int quantity){
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.path = path;
-        this.quantity = quantity;
-    }
-    
 
     public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -74,8 +63,17 @@ public class Product {
     }
 
     @Override
-    public String toString() {
-        return "Product [id=" + id + ", name=" + name + ", price=" + price + ", path=" + path + ", quantity=" + quantity +
-        "]";
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        return id.equals(product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

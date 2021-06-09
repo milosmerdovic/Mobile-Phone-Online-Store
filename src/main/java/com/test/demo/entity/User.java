@@ -51,18 +51,6 @@ public class User {
     @JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Collection<Role> roles;
 
-    public User (){
-    }
-    public User (long id, String email, String password, String username, String name, String lastName, int active){
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.username = username;
-        this.lastName = lastName;
-        this.active = active;
-    }
-
     public long getId() {
         return id;
     }
@@ -118,12 +106,6 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
-
-    @Override
-    public String toString() {
-        return " User [id =" + id + ",name =" + name +",lastName =" + lastName +",email =" + email + ", username =" + username + ", password =" + password + ", active =" + active + "]";
-    }
-
 
 
 }
