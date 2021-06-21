@@ -1,6 +1,8 @@
 package com.test.demo.controllers;
 
-import com.test.demo.exception.NotEnoughProductsInCartException;
+import javax.validation.Valid;
+
+import com.test.demo.entity.Product;
 import com.test.demo.service.ProductService;
 import com.test.demo.service.ShoppingCartService;
 
@@ -43,14 +45,11 @@ public class ShoppingCartController {
         return "redirect:/shoppingCart";
     }
 
-    @GetMapping("/shoppingCart/checkout")
-    public ModelAndView checkout() {
-        try {
-            shoppingCartService.checkout();
-        } catch (NotEnoughProductsInCartException e) {
-            return shoppingCart().addObject("outOfStockMessage", e.getMessage());
-        }
-        return shoppingCart();
+    @GetMapping("/shoppingCart/{id}")
+    public String checkout(@PathVariable("id") Long id) {
+      
+        return "redirect:/order";
     }
+
 
 }
