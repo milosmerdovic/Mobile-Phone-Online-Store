@@ -15,7 +15,9 @@ public class ShoppingCart {
     @Id
     @GeneratedValue
     private int id;
+
     private int quantity;
+    
     @OneToMany
     List <Product> products;
 

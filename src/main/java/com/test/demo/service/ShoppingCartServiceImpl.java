@@ -65,7 +65,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
      }
 
     @Override
-    public void checkout() throws NotEnoughProductsInCartException {
+    public void checkout(){
         products.clear();
     }
     
