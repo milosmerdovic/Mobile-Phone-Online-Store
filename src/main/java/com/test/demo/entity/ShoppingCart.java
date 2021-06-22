@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("session")
 @Entity
 public class ShoppingCart {
 
@@ -17,7 +21,7 @@ public class ShoppingCart {
     private int id;
 
     private int quantity;
-    
+
     @OneToMany
     List <Product> products;
 

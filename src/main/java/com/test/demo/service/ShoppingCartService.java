@@ -12,4 +12,5 @@ public interface ShoppingCartService {
     Map <Product, Integer> productsInCart();
     BigDecimal totalPrice();
     void checkout();
+    void printCart();
 }

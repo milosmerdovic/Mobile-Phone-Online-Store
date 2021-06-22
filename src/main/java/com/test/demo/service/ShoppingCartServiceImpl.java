@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.test.demo.exception.NotEnoughProductsInCartException;
 import com.test.demo.entity.Product;
-
+import com.test.demo.entity.ShoppingCart;
 import com.test.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -66,8 +66,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     @Override
     public void checkout(){
-        products.clear();
+        this.productsInCart();
     }
+
+    @Override
+    public void printCart() {
+        System.out.println("Broj Artikla " + products.size());
+    }
+
     
 
 }

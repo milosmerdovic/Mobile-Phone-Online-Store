@@ -1,17 +1,26 @@
 package com.test.demo.controllers;
 
-import javax.validation.Valid;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import com.test.demo.entity.Product;
+import com.test.demo.entity.ShoppingCart;
 import com.test.demo.service.ProductService;
+import com.test.demo.service.ProductServiceImpl;
 import com.test.demo.service.ShoppingCartService;
 
-import org.hibernate.validator.internal.constraintvalidators.bv.time.past.PastValidatorForMinguoDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class ShoppingCartController {
@@ -20,7 +29,11 @@ public class ShoppingCartController {
     private final ProductService productService;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService) {
+    private ShoppingCart shoppingCart;
+
+    @Autowired
+    public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService, ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
         this.shoppingCartService = shoppingCartService;
         this.productService = productService;
     }
@@ -37,6 +50,7 @@ public class ShoppingCartController {
     @GetMapping("/shoppingCart/addProduct/{id}")
     public String addProductToCart(@PathVariable("id") Long id) {
         productService.findById(id).ifPresent(shoppingCartService::addProduct);
+        
         return "redirect:/shoppingCart";
     }
 
@@ -46,9 +60,9 @@ public class ShoppingCartController {
         return "redirect:/shoppingCart";
     }
 
-    @GetMapping("/shoppingCart/{id}")
-    public String checkout(@PathVariable("id") Long id) {
-      
+    @GetMapping("/shoppingCart/checkout")
+    public String checkout(){
+        shoppingCartService.printCart();
         return "redirect:/order";
     }
     
