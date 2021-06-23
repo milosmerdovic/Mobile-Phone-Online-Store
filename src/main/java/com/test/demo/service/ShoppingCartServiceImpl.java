@@ -5,11 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.test.demo.exception.NotEnoughProductsInCartException;
 import com.test.demo.entity.Product;
-import com.test.demo.entity.ShoppingCart;
-import com.test.demo.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -21,14 +17,9 @@ import org.springframework.web.context.WebApplicationContext;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
-    private ProductRepository productRepository;
    
     private Map<Product, Integer> products = new HashMap<>();
 
-    @Autowired
-    public ShoppingCartServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @Override
     public void addProduct(Product product) {
@@ -65,15 +56,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
      }
 
     @Override
-    public void checkout(){
-        this.productsInCart();
-    }
-
-    @Override
     public void printCart() {
         System.out.println("Broj Artikla " + products.size());
     }
-
-    
-
 }
