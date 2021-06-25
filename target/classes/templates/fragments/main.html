@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="header :: header-css">
+</head>
+
+<body>
+    <div th:fragment="main-content">
+        <div class="window-section">
+            <div class="container">
+                <div class="row">
+                    <h1>Welcome to mobile sales page</h1>
+                    <p>Every tuesday sales on chosen products!</p>
+                </div>
+            </div>
+        </div>
+        <div th:switch="${allProducts}" class="newest-products-section">
+            <h3>All Products</h3>
+            <div class="grid-container">
+                <h4 th:case="null">No data</h4>
+                <div th:case="*">
+                    <div class="grid-item" th:each="product :${allProducts}">
+                        <td>
+                            <img th:src="${product.path}"><br/> [[${product.name}]]
+                            <br/>
+                            <p>[[${product.price}]] e</p>
+                            </br>
+                            <div th:inline="text">In Stock: [[${product.quantity}]]</div>
+                            <a href="#" th:href="@{/shoppingCart/addProduct/{id}(id=${product.id})}" class="btn btn-primary">
+                                <i class="fas fa-shopping-cart"> Add to cart</i></a>
+                        </td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

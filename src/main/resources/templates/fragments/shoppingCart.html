@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/header :: header-css">
+</head>
+
+<body>
+    <div th:fragment="shopping-cart">
+        <div class="grid-container">
+            <div class="panel-default well" th:each="product : ${products.entrySet()}">
+                <div class="panel-heading">
+                    <h1><a th:text="${product.getKey().name}" th:href="@{'/product/' + ${product.getKey().id}}">Title</a></h1>
+                </div>
+                <div class="row panel-body">
+                    <div th:inline="text" class="col-md-3">Price: [[${product.getKey().price}]] $</div>
+                    <div th:inline="text" class="col-md-6">Quantity: [[${product.getValue()}]]</div>
+                    <a th:href="@{'/shoppingCart/removeProduct/{id}'(id=${product.getKey().id})}" class="col-md-2">
+                        <button type="button" class="btn btn-primary" th:text="Remove">Remove</button>
+                    </a>
+                </div>
+                <br></br>
+            </div>
+            <div class="row panel-body">
+                <h2 class="col-md-8" th:inline="text">Total: [[${total}]]</h2>
+                <a th:href="@{'/shoppingCart/checkout'}" class="col-md-1">
+                    <button type="button" class="btn btn-danger" th:text="Checkout">Checkout</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

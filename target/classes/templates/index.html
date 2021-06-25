@@ -1,82 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-		<link rel="stylesheet" th:href="@{css/style.css}" href="../static/css/style.css">
-	</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/header :: header-css">
+</head>
 
 <body>
-<header>
-	<div class="pre-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="logo">
-						<a href="/"><img src="images/log.png" width="50" height="50" alt="logo">Mobile page</p></a>
-					</div>
-				</div>
+    <div th:replace="fragments/header :: navbar"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div th:replace="fragments/main :: main-content">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div th:replace="fragments/shoppingCart :: shopping-cart"></div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+    <div>
 
-				<div class="col-md-6">
-					<ul class="first-menu">
-						<li><a href="/">Home</a></li>
-						<li><a href="/login">Login</a></li>
-						<li><a href="/shoppingCart">Cart</a></li>
-						<iframe src="shoppingCart.html" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0" >
-						</iframe>
-					
-					</ul>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</header>
-
-<div class="window-section">
-	<div class="container">
-		<div class="row">
-				<h1>Welcome to mobile sales page</h1>
-				<p>Every tuesday sales on chosen products!</p>
-		</div>
-	</div>
-</div>
-<div th:switch="${products}" class="newest-products-section">
-	<h3>All Products</h3>
-		<div class="grid-container">
-				<h4 th:case="null">No data</h4>
-					<div th:case="*">
-						<div class="grid-item" th:each="product :${products}">
-								<td>
-									<img th:src="${product.path}"><br/>
-									[[${product.name}]]<br/>
-									<p>[[${product.price}]] e</p></br>
-									<div th:inline="text" >In Stock: [[${product.quantity}]]</div>
-									<a th:href="@{/shoppingCart/addProduct/{id}(id=${product.id})}" class="btn btn-primary">
-										<i class = "fas fa-shopping-cart"> Add to cart</i></a>
-								</td>
-						</div>
-					</div>
-		</div>
-</div>
-<footer>
-	<div class="footer">
-		<div class="container">
-			<div class="row">
-					<p>Feel free to contact us about purchase products <br/> email: info@gmail.com</p>
-			</div>
-		</div>
-	</div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-</body> 
+    </div>
+</body>
 
 </html>
