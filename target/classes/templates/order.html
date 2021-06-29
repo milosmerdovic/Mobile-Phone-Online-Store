@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-<head>
+<head th:replace="fragments/header :: header-css">
 </head>
-
 <body>
-
-    [[${total}]]
+	<div th:replace="fragments/header :: navbar"></div>
+	<form action="#" th:action="@{/createOrder}" th:object="${order}" method="post">
+	
+		<div class="form-group col-md-6">
+			<label for="order.user.name" class="col-form-label">Name</label>
+			<input type="text" th:field="*{order.user.name}" class="form-control" id="order.user.name" placeholder="Name">
+			<span th:if="${#fields.hasErrors('order.user.name')}" th:errors="*{order.user.name}" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="order.user.lastName" class="col-form-label">Last Name</label>
+			<input type="text" th:field="*{order.user.lastName}" class="form-control" id="order.user.lastName" placeholder="Last Name">
+			<span th:if="${#fields.hasErrors('order.user.lastName')}" th:errors="*{order.user.lastName}" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="order.user.email" class="col-form-label">Email</label>
+			<input type="text" th:field="*{order.user.email}" class="form-control" id="order.user.email" placeholder="Email">
+			<span th:if="${#fields.hasErrors('order.user.email')}" th:errors="*{order.user.email}" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="order.user.address" class="col-form-label">Address</label>
+			<input type="text" th:field="*{order.user.address}" class="form-control" id="order.user.address" placeholder="Address">
+			<span th:if="${#fields.hasErrors('order.user.address')}" th:errors="*{order.user.address}" class="text-danger"></span>
+		</div>
+		<div class="products">
+			<div th:each="product : ${products.entrySet()}">
+			<h1 th:text="${product.getKey().name}">Title</h1>
+			<div th:inline="text">Quantity: [[${product.getValue()}]]</div>
+			<h2 th:inline="text">Total: [[${total}]]</h2>
+			</div>
+		</div>
+		
+	<div class="row">
+		<div class="col-md-6 mt-4">
+			<input type="submit" class="btn btn-primary" value="Make Order">
+		</div>
+	</div>
+    
+	</form>
+    <div th:replace="fragments/footer :: footer"></div>
 </body>
 
 </html>
