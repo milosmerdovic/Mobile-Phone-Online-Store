@@ -4,12 +4,11 @@ import com.test.demo.entity.Order;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.service.ShoppingCartService;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -24,18 +23,24 @@ public class OrderController {
     }
 
     @GetMapping("/order")
-    public String orderList(Model model) {
+    public String orderList(Model model, Order order) {
         model.addAttribute("products", shoppingCartService.productsInCart());
         model.addAttribute("total", shoppingCartService.totalPrice().toString());
+        model.addAttribute("order", order);
         return "order";
     }
 	
 	  @PostMapping("/createOrder") 
-	  public String order(@Valid Order order,BindingResult result) {
+	  public String order(@ModelAttribute Order order, BindingResult result) {
 		  if (result.hasErrors()) {
 			  return "redirect:/order"; 
 			  }
-		  orderRepository.save(order); 
+		  orderRepository.save(order);
+		  /*
+		   * orderService.finishOrder();
+		   */
+		  System.out.println("Order sent");
 		  return "redirect:/index";
-		  } 
+		  }
+
 }

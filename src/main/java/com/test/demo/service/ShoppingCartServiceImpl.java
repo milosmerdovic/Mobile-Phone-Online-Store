@@ -17,9 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
-   
     private Map<Product, Integer> products = new HashMap<>();
-
 
     @Override
     public void addProduct(Product product) {
