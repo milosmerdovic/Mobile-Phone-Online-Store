@@ -43,8 +43,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     public Map<Product, Integer> productsInCart() {
         return Collections.unmodifiableMap(products);
     }
-
-
+    
      @Override
      public BigDecimal totalPrice() {
          return products.entrySet().stream()

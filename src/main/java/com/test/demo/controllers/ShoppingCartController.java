@@ -22,17 +22,6 @@ public class ShoppingCartController {
         this.productService = productService;
     }
 
-    
-/* 
-    @GetMapping("/shoppingCart")
-    public ModelAndView shoppingCart() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("products", shoppingCartService.productsInCart());
-        modelAndView.addObject("total", shoppingCartService.totalPrice().toString());
-        modelAndView.setViewName("fragments/shoppingCart");
-        return modelAndView;
-    }
- */
     @GetMapping("/shoppingCart/addProduct/{id}")
     public String addProductToCart(@PathVariable("id") Long id) {
         productService.findById(id).ifPresent(shoppingCartService::addProduct);
