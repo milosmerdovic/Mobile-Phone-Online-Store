@@ -18,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     private Map<Product, Integer> products = new HashMap<>();
-
+  
     @Override
     public void addProduct(Product product) {
         if (products.containsKey(product)){

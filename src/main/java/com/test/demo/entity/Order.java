@@ -1,13 +1,14 @@
 package com.test.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -27,7 +28,8 @@ public class Order {
 	@NotNull(message="This field is mandatory!")
 	private String customerEmail;
 	private LocalDateTime createdAt = LocalDateTime.now();
-	
+	@OneToMany
+	private List<OrderItem> orderItems;
 	
 	public int getId() {
 		return id;
@@ -69,6 +71,13 @@ public class Order {
 	}
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 }
