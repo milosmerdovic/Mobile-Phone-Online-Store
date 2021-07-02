@@ -1,11 +1,15 @@
 package com.test.demo.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.test.demo.entity.OrderItem;
 import com.test.demo.entity.Product;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -18,7 +22,8 @@ import org.springframework.web.context.WebApplicationContext;
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     private Map<Product, Integer> products = new HashMap<>();
-  
+    private List<OrderItem> orderItems;
+
     @Override
     public void addProduct(Product product) {
         if (products.containsKey(product)){
@@ -43,6 +48,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     public Map<Product, Integer> productsInCart() {
         return Collections.unmodifiableMap(products);
     }
+    
+    
+    public List<OrderItem> productsForOrders(){
+    	for(Map.Entry<Product, Integer> entry : products.entrySet())
+    		System.out.println("Key is : " + entry.getKey());
+    	return orderItems;
+      	 }
     
      @Override
      public BigDecimal totalPrice() {

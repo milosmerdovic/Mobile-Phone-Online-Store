@@ -11,11 +11,9 @@ public class OrderItem {
 	@Id
 	@GeneratedValue
 	private int id;
-
 	@ManyToOne
-	private Product product;	
+	private Product product;
 	private int qty;
-	
 	
 	public int getId() {
 		return id;
@@ -36,5 +34,4 @@ public class OrderItem {
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
-	
 }

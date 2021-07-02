@@ -1,11 +1,8 @@
 package com.test.demo.controllers;
 
 import com.test.demo.entity.Order;
-import com.test.demo.entity.OrderItem;
-import com.test.demo.repository.OrderItemsRepository;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.service.ShoppingCartService;
-import com.test.demo.service.ShoppingCartServiceImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +26,7 @@ public class OrderController {
     public String orderList(Model model, Order order) {
         model.addAttribute("products", shoppingCartService.productsInCart());
         model.addAttribute("total", shoppingCartService.totalPrice().toString());
-        order.setOrderItems(orderService.methodForRetrivingItems??);
+        order.setOrderItems(shoppingCartService.productsForOrders());
         model.addAttribute("order", order);
         return "order";
     }
