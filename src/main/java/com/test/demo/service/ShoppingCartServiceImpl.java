@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.test.demo.entity.Order;
 import com.test.demo.entity.OrderItem;
 import com.test.demo.entity.Product;
 
@@ -22,8 +23,22 @@ import org.springframework.web.context.WebApplicationContext;
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     private Map<Product, Integer> products = new HashMap<>();
-    private List<OrderItem> orderItems;
+    private List<Product> productForOrder;
 
+    @Override
+    public List <Product> orderedProducts(){
+    		this.productForOrder = new ArrayList<Product>(products.keySet());
+    		System.out.println("Ordered products : " + productForOrder.toString());
+    	return productForOrder;
+    }
+    
+    public List <OrderItem> orderItems(){
+    	for(Map.Entry<Product, Integer>entry : products.entrySet()) {
+    		
+    	}
+		return null;
+    }
+    
     @Override
     public void addProduct(Product product) {
         if (products.containsKey(product)){
@@ -50,12 +65,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     }
     
     
-    public List<OrderItem> productsForOrders(){
-    	for(Map.Entry<Product, Integer> entry : products.entrySet())
-    		System.out.println("Key is : " + entry.getKey());
-    	return orderItems;
-      	 }
-    
      @Override
      public BigDecimal totalPrice() {
          return products.entrySet().stream()
@@ -66,6 +75,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     @Override
     public void printCart() {
-        System.out.println("Broj Artikla " + products.size());
+        System.out.println("Broj Artikla " + products.toString());
     }
 }
+
+
+
+
+
+
+
+
+
