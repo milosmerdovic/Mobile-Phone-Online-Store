@@ -1,12 +1,11 @@
 package com.test.demo.entity;
 
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class OrderItem {
@@ -14,9 +13,16 @@ public class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@OneToMany
-	private List<Product> product;
+	@ManyToOne
+	private Product product;
 	private int qty;
+	
+	public OrderItem(){}
+	
+	public OrderItem(Product product, int qty){
+		this.product=product;
+		this.qty=qty;
+	}
 	
 	public int getId() {
 		return id;
@@ -24,10 +30,10 @@ public class OrderItem {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public List <Product> getProduct() {
+	public Product getProduct() {
 		return product;
 	}
-	public void setProduct(List<Product> product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 	

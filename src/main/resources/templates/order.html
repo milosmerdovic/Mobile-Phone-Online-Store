@@ -27,7 +27,8 @@
 	        <input id="customerEmail" placeholder="Enter Email" required type="text" th:field="*{customerEmail}"
 	               class="form-control"/>
     	</div>
-    	
+		<input type="submit" class="btn btn-primary" value="Make Order">
+	</form>    	
 		<div class="products-section">
 			<div th:each="product : ${products.entrySet()}">
 			<div th:text="${product.getKey().name}" >Title</div>
@@ -35,9 +36,7 @@
 			</div>
 		</div>
 			<h2 th:inline="text">Total: [[${total}]]</h2>
-		<input type="submit" class="btn btn-primary" value="Make Order">
 		
-	</form>
     <div th:replace="fragments/footer :: footer"></div>
 </body>
 
