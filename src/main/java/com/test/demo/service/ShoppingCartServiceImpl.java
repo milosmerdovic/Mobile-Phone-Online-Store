@@ -11,6 +11,7 @@ import com.test.demo.entity.OrderItem;
 import com.test.demo.entity.Product;
 import com.test.demo.repository.OrderItemsRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -23,25 +24,19 @@ import org.springframework.web.context.WebApplicationContext;
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     private Map<Product, Integer> products = new HashMap<>();
-//    private List<Product> productForOrder;
     private List<OrderItem> items = new ArrayList<>();
+    @Autowired
     private OrderItemsRepository orderItemsRepository;
 
-	/*
-	 * @Override public List <Product> orderedProducts(){ this.productForOrder = new
-	 * ArrayList<Product>(products.keySet());
-	 * System.out.println("Ordered products : " + productForOrder.toString());
-	 * return productForOrder; }
-	 */
     
     @Override
     public List <OrderItem> orderItems(){
     	for(Map.Entry<Product, Integer> entry : products.entrySet()) {
     		OrderItem item = new OrderItem(entry.getKey(), entry.getValue());
     		items.add(item);
-    		orderItemsRepository.saveAll(items);
     		System.out.println(items);
     	}
+    	orderItemsRepository.saveAll(items);
 		return items;
     }
     
@@ -83,6 +78,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     public void printCart() {
         System.out.println("Broj Artikla " + products.toString());
     }
+
+	@Override
+	public void clearList() {
+		products.clear();
+		items.clear();
+	}
 }
 
 

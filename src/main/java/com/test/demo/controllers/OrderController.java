@@ -5,7 +5,7 @@ import com.test.demo.entity.OrderItem;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.service.ShoppingCartService;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class OrderController {
     
     private ShoppingCartService shoppingCartService;
+    @Autowired
     private OrderRepository orderRepository;
 
     OrderController(ShoppingCartService shoppingCartService){
@@ -38,6 +39,7 @@ public class OrderController {
 			  }
 		  orderRepository.save(order);
 		  System.out.println("Order sent");
+		  shoppingCartService.clearList();
 		  return "redirect:/index";
 		  }
 }

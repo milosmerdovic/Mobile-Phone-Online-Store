@@ -15,7 +15,5 @@ public interface ShoppingCartService {
     List <OrderItem> orderItems();
     BigDecimal totalPrice();
     void printCart();
-	/*
-	 * List<Product> orderedProducts();
-	 */
+    void clearList();
     }
