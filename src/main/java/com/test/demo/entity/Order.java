@@ -3,11 +3,14 @@ package com.test.demo.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -15,20 +18,34 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="TABLE_ORDER")
+@Table(name="orders")
 public class Order {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
 	private int id;
-	@NotNull(message = "This field is mandatory!")	
-	private String customerName, customerLastName, customerAddress;
+	
+	@NotNull(message = "This field is mandatory!")
+    @Column(name = "name", nullable = false)
+	private String customerName;
+	
+	@Column(name = "last_name", nullable = false)
+	private String customerLastName;
+	
+	@Column(name = "address", nullable = false)
+	private String customerAddress;
+	
 	@Email(message = "Please enter a valid email address!")
 	@NotNull(message="This field is mandatory!")
+	@Column(name = "email", nullable = false, unique = true)
 	private String customerEmail;
+	
+	@Column(name = "created_at")
 	private LocalDateTime createdAt = LocalDateTime.now();
-	@OneToMany
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="orders_items", joinColumns=@JoinColumn(name="order_id"), inverseJoinColumns=@JoinColumn(name="order_items_id"))
 	private List<OrderItem> orderItems;
 	
 	public int getId() {

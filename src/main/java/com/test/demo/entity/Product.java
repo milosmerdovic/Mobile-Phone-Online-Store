@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "id")
     private Long id;
 

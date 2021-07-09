@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class OrderController {
+	
+	private static final String Order_Message = "Your shipment has been sent";
     
     private ShoppingCartService shoppingCartService;
     @Autowired
@@ -24,7 +26,7 @@ public class OrderController {
     }
     
     @GetMapping("/order")
-    public String orderList(Model model, Order order, OrderItem orderItems) {
+    public String orderList(Model model, OrderItem orderItems, Order order) {
         model.addAttribute("products", shoppingCartService.productsInCart());
         model.addAttribute("total", shoppingCartService.totalPrice().toString());
         order.setOrderItems(shoppingCartService.orderItems());
@@ -32,13 +34,13 @@ public class OrderController {
         return "order";
     }
     
-	  @PostMapping("/createOrder") 
-	  public String order(Order order, BindingResult result) {
+	  @PostMapping("/createOrder")
+	  public String order(Order order, BindingResult result, Model model) {
 		  if (result.hasErrors()) {
-			  return "redirect:/order"; 
+			  return "redirect:/order";
 			  }
 		  orderRepository.save(order);
-		  System.out.println("Order sent");
+		  model.addAttribute("message", Order_Message);
 		  shoppingCartService.clearList();
 		  return "redirect:/index";
 		  }

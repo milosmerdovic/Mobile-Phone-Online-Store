@@ -27,14 +27,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     private List<OrderItem> items = new ArrayList<>();
     @Autowired
     private OrderItemsRepository orderItemsRepository;
-
     
     @Override
     public List <OrderItem> orderItems(){
     	for(Map.Entry<Product, Integer> entry : products.entrySet()) {
     		OrderItem item = new OrderItem(entry.getKey(), entry.getValue());
     		items.add(item);
-    		System.out.println(items);
     	}
     	orderItemsRepository.saveAll(items);
 		return items;
