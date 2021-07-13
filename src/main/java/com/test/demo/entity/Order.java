@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,7 +21,7 @@ import javax.validation.constraints.NotNull;
 public class Order {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
 	private int id;
 	
@@ -41,7 +43,7 @@ public class Order {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt = LocalDateTime.now();
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
 	private List<OrderItem> orderItems;
 	
 	public int getId() {

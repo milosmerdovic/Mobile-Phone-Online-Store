@@ -7,9 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.test.demo.entity.Order;
 import com.test.demo.entity.OrderItem;
 import com.test.demo.entity.Product;
 import com.test.demo.repository.OrderItemsRepository;
+import com.test.demo.repository.ProductRepository;
+
+import exception.NotEnoughProductsInStock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -27,11 +31,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     private List<OrderItem> items = new ArrayList<>();
     @Autowired
     private OrderItemsRepository orderItemsRepository;
+    @Autowired
+    private ProductRepository productRepository;
     
     @Override
-    public List <OrderItem> orderItems(){
+    public List <OrderItem> orderItems(Order order){
     	for(Map.Entry<Product, Integer> entry : products.entrySet()) {
-    		OrderItem item = new OrderItem(entry.getKey(), entry.getValue());
+    		OrderItem item = new OrderItem(entry.getKey(), entry.getValue(), order);
     		items.add(item);
     	}
     	orderItemsRepository.saveAll(items);
@@ -76,12 +82,21 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     public void printCart() {
         System.out.println("Broj Artikla " + products.toString());
     }
-
+    
 	@Override
-	public void clearList() {
-		products.clear();
-		items.clear();
-	}
+	 public void finishOrder() throws NotEnoughProductsInStock {
+	  Product product;
+	  for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+		  product = productRepository.getById(entry.getKey().getId()); 
+	  
+	  	  if(product.getQuantity() < entry.getValue()) throw new NotEnoughProductsInStock(product);
+	  		 entry.getKey().setQuantity(product.getQuantity() - entry.getValue()); 
+	  }
+		  productRepository.saveAll(products.keySet());
+		  productRepository.flush();
+		  products.clear();
+		  items.clear();
+	  }
 }
 
 

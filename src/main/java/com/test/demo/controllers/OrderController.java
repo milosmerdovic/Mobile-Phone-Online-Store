@@ -1,9 +1,10 @@
 package com.test.demo.controllers;
 
 import com.test.demo.entity.Order;
-import com.test.demo.entity.OrderItem;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.service.ShoppingCartService;
+
+import exception.NotEnoughProductsInStock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,22 +27,22 @@ public class OrderController {
     }
     
     @GetMapping("/order")
-    public String orderList(Model model, OrderItem orderItems, Order order) {
+    public String orderList(Model model, Order order) {
         model.addAttribute("products", shoppingCartService.productsInCart());
         model.addAttribute("total", shoppingCartService.totalPrice().toString());
-        order.setOrderItems(shoppingCartService.orderItems());
-        model.addAttribute("order", order);
+        model.addAttribute("order", order); 
         return "order";
     }
     
 	  @PostMapping("/createOrder")
-	  public String order(Order order, BindingResult result, Model model) {
+	  public String order(Order order, BindingResult result, Model model) throws NotEnoughProductsInStock {
 		  if (result.hasErrors()) {
 			  return "redirect:/order";
 			  }
 		  orderRepository.save(order);
+		  order.setOrderItems(shoppingCartService.orderItems(order));
 		  model.addAttribute("message", Order_Message);
-		  shoppingCartService.clearList();
+		  shoppingCartService.finishOrder();
 		  return "redirect:/index";
 		  }
 }

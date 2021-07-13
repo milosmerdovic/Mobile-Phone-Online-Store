@@ -7,7 +7,7 @@
 <body>
     <div th:fragment="main-content">
         <div class="window-section">
-        <h3 th:text="${message}">message</h3>
+        <h3 th:text="#{message}">message</h3>
             <div class="container">
                 <div class="row">
                     <h1>Welcome to mobile sales page</h1>
@@ -26,7 +26,6 @@
                             <br/>
                             <p>[[${product.price}]] e</p>
                             </br>
-                            <div th:inline="text">In Stock: [[${product.quantity}]]</div>
                             <a href="#" th:href="@{/shoppingCart/addProduct/{id}(id=${product.id})}" class="btn btn-primary">
                                 <i class="fas fa-shopping-cart"> Add to cart</i></a>
                         </td>
