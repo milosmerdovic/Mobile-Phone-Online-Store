@@ -6,21 +6,27 @@
 
 <body>
     <div th:replace="fragments/header :: navbar"></div>
+    <div class="alert alert-success" role="alert" style="text-align: center;" th:if="${message}" th:text="${message}" />
+    <div class="alert alert-info" role="alert" style="text-align: center;" th:if="${outOfStockMessage}" th:text="${outOfStockMessage}" />
+    <!-- <div class="container">
+        <div class="row">
+                <div th:replace="fragments/main :: main-content">
+                </div>
+        </div>
+    </div> -->
+    
     <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <div th:replace="fragments/main :: main-content">
                 </div>
             </div>
+        </div>
             <div class="col-md-4">
                 <div th:replace="fragments/shoppingCart :: shopping-cart"></div>
             </div>
-        </div>
     </div>
+    
     <div th:replace="fragments/footer :: footer"></div>
-    <div>
-
-    </div>
 </body>
-
 </html>

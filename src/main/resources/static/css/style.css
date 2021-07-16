@@ -1,29 +1,37 @@
 * {
     padding: 0;
     margin: 0;
+	font-family: 'Nunito', sans-serif;
+    box-sizing: border-box; 
 }
-
 img {
-    vertical-align: middle;
-    border-style: none;
-    width: 15%;
+    width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
-
 body {
     background-color: #f9f9f9;
 }
 
 .pre-header {
-    background-color: #fa6540;
+    background-color: #40a3fa;
     height: 60px;
-    color: #343a40;
+    color: dimgray;
     padding-top: 15px;
+    
 }
 
 .pre-header .logo {
-    display: inline-flex;
-    color: white;
-    text-align: center;
+	display: block ruby;
+	text-transform: uppercase;
+	max-width: 20%;
+}
+.pre-header .logo p{
+	color: cornsilk;
+}
+.pre-header .logo img{
+	max-width: 39px;
 }
 
 .pre-header .first-menu li {
@@ -32,12 +40,13 @@ body {
 }
 
 .pre-header .first-menu li a {
-    color: #343a40;
+    color: cornsilk;
     text-transform: uppercase;
 }
 
 .pre-header .first-menu {
     text-align: right;
+    max-width: 80%;
 }
 
 
@@ -45,6 +54,7 @@ body {
 
 .window-section {
     background-image: url("../images/proba2.jpg");
+    background-position:center;
     padding-top: 225px;
     padding-bottom: 135px;
     background-size: cover;
@@ -65,51 +75,58 @@ body {
     margin-bottom: 20px;
 }
 
-
-/* Newest Product Section */
-
-.newest-products-section h3 {
+.all-products h3 {
     text-align: center;
-    margin-bottom: 45px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+   
 }
 
-.newest-products-section {
-    padding-bottom: 115px;
-    padding-top: 115px;
+.grid-item {
+	display: grid;
+	text-align: center;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-gap: 20px;
 }
 
-
-/* Grid Container  */
-
-.newest-products-section .grid-container {
-    display: inline-grid;
-    grid-template-columns: auto auto auto;
-    background-color: #6ca698;
-    padding: 10px;
+.grid-item .col-md-4{
+	padding: 38px;
+	font-size: 20px;
+	display: grid;
+}
+.grid-container{
+	margin-top: 70px;
+	border-block: solid; 
+	right: 0;
 }
 
+.grid-container .row-panel-body{
+	margin-bottom: 20px;
+}
 
-/* Grid item */
+.grid-container .panel-default-well{
+	padding-left: 15px;
+}
 
-.newest-products-section .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
+.grid-container h2{
+	margin-top: 20px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-group{
+	max-width: 50%;
+    margin-left: 25%;
+    
 }
 
 .footer {
     height: 60px;
-    background-color: #fa6540;
+    background-color: #40a3fa;
     color: #343a40;
     text-align: center;
     margin-top: 10px;
     padding-top: 5px;
-}
-
-.col-md-4{
-	margin-top: 60px;
 }
 
 

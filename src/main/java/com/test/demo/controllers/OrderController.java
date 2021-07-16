@@ -4,14 +4,13 @@ import com.test.demo.entity.Order;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.service.ShoppingCartService;
 
-import exception.NotEnoughProductsInStock;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class OrderController {
@@ -35,14 +34,14 @@ public class OrderController {
     }
     
 	  @PostMapping("/createOrder")
-	  public String order(Order order, BindingResult result, Model model) throws NotEnoughProductsInStock {
+	  public String finishOrder(Order order, BindingResult result, RedirectAttributes redirectAttributes){
 		  if (result.hasErrors()) {
-			  return "redirect:/order";
-			  }
+			  return "redirect:/order"; 
+			  }	
 		  orderRepository.save(order);
 		  order.setOrderItems(shoppingCartService.orderItems(order));
-		  model.addAttribute("message", Order_Message);
 		  shoppingCartService.finishOrder();
+		  redirectAttributes.addFlashAttribute("message", Order_Message);
 		  return "redirect:/index";
 		  }
 }

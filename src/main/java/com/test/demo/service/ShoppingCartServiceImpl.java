@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.test.demo.entity.Order;
 import com.test.demo.entity.OrderItem;
@@ -13,7 +14,6 @@ import com.test.demo.entity.Product;
 import com.test.demo.repository.OrderItemsRepository;
 import com.test.demo.repository.ProductRepository;
 
-import exception.NotEnoughProductsInStock;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -84,19 +84,30 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     }
     
 	@Override
-	 public void finishOrder() throws NotEnoughProductsInStock {
+	 public void finishOrder(){
 	  Product product;
 	  for (Map.Entry<Product, Integer> entry : products.entrySet()) {
 		  product = productRepository.getById(entry.getKey().getId()); 
-	  
-	  	  if(product.getQuantity() < entry.getValue()) throw new NotEnoughProductsInStock(product);
-	  		 entry.getKey().setQuantity(product.getQuantity() - entry.getValue()); 
+	  	  entry.getKey().setQuantity(product.getQuantity() - entry.getValue());
 	  }
 		  productRepository.saveAll(products.keySet());
 		  productRepository.flush();
 		  products.clear();
 		  items.clear();
-	  }
+	  
+	}
+
+	@Override
+	public boolean checkStock() {
+		for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+			Optional<Product> product = productRepository.findById(entry.getKey().getId());
+			if(product.get().getQuantity() < entry.getValue()) {
+	  		  return false;
+			}
+		}
+		return true;
+	}
+
 }
 
 

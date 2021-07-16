@@ -1,5 +1,6 @@
 package com.test.demo.controllers;
 
+import com.test.demo.entity.Product;
 import com.test.demo.service.ProductService;
 import com.test.demo.service.ShoppingCartService;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -14,6 +16,7 @@ public class ShoppingCartController {
     
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
+	private static final String OUT_OF_STOCK = "Not enoguh products in stock";
 
 
     @Autowired
@@ -35,9 +38,16 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/shoppingCart/checkout")
-    public String checkout(){
-        shoppingCartService.printCart();
-        return "redirect:/order";
+    public String checkout(Product product, RedirectAttributes redirectAttributes){
+    	
+		boolean result = shoppingCartService.checkStock();
+		if(result) {
+			return "redirect:/order";
+		}
+		else {
+			redirectAttributes.addFlashAttribute("outOfStockMessage", OUT_OF_STOCK);
+			return "redirect:/index";
+		}
     }
     
 }

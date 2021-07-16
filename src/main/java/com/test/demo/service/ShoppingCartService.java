@@ -8,8 +8,6 @@ import com.test.demo.entity.Order;
 import com.test.demo.entity.OrderItem;
 import com.test.demo.entity.Product;
 
-import exception.NotEnoughProductsInStock;
-
 public interface ShoppingCartService {
 
     void addProduct(Product product);
@@ -18,5 +16,6 @@ public interface ShoppingCartService {
     List <OrderItem> orderItems(Order order);
     BigDecimal totalPrice();
     void printCart();
-	void finishOrder() throws NotEnoughProductsInStock;
+    void finishOrder();
+    boolean checkStock();
     }
