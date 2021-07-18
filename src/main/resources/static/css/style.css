@@ -15,7 +15,7 @@ body {
 }
 
 .pre-header {
-    background-color: #40a3fa;
+    background-color: #0071dc;
     height: 60px;
     color: dimgray;
     padding-top: 15px;
@@ -49,11 +49,8 @@ body {
     max-width: 80%;
 }
 
-
-/*Middle section content*/
-
 .window-section {
-    background-image: url("../images/proba2.jpg");
+    background-image: url("../images/pozadina.jpg");
     background-position:center;
     padding-top: 225px;
     padding-bottom: 135px;
@@ -89,15 +86,22 @@ body {
 	grid-gap: 20px;
 }
 
-.grid-item .col-md-4{
-	padding: 38px;
+.grid-item .item{
+    padding: 38px;
 	font-size: 20px;
 	display: grid;
+    box-shadow: 10px 10px 5px #7987a2;
+    background-color: #b4cae1;
 }
+
+.grid-item :hover{
+    background-color: #86b1df;
+    transition: 0.3s;
+}
+
 .grid-container{
-	margin-top: 70px;
+	margin-top: 120px;
 	border-block: solid; 
-	right: 0;
 }
 
 .grid-container .row-panel-body{
@@ -122,7 +126,7 @@ body {
 
 .footer {
     height: 60px;
-    background-color: #40a3fa;
+    background-color: #0071dc;
     color: #343a40;
     text-align: center;
     margin-top: 10px;
