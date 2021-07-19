@@ -7,7 +7,7 @@
 
 ## General info
 
-* This is a demo project for practicing Spring + Thymeleaf. The idea was to build some basic shopping cart web app.
+* This is a demo project for practicing Spring + Thymeleaf. The idea was to build some basic web app.
 Users can shop for products. Each user has his own shopping cart (session functionality). Checkout is transactional, users are anonymous.
 
 ## Technologies
@@ -36,5 +36,6 @@ OS name: "linux", version: "5.4.0-74-generic", arch: "amd64", family: "unix"
 * The Spring Boot Maven plugin includes a run goal that can be used to quickly compile and run your application. Applications run in an exploded form, as they do in your IDE. The following example shows a typical Maven command to run a Spring Boot application:
 
 `$ mvn spring-boot:run`
+
 
 In `/src/main/resources/application.properties` file it is possible to change datasource url as well as port, username and password if it is included.
