@@ -107,6 +107,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		}
 		return true;
 	}
+	
+	@Override
+	public boolean checkOrder() {
+		if(products.isEmpty()) {
+			return false;
+			}
+		return true;
+	}
 
 }
 

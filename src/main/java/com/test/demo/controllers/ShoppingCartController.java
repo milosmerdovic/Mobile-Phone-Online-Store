@@ -16,7 +16,7 @@ public class ShoppingCartController {
     
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
-	private static final String OUT_OF_STOCK = "Not enoguh products in stock";
+	private static final String NULL_ORDER = "You haven't ordered yet or there is not enough products in stock!";
 
 
     @Autowired
@@ -40,14 +40,13 @@ public class ShoppingCartController {
     @GetMapping("/shoppingCart/checkout")
     public String checkout(Product product, RedirectAttributes redirectAttributes){
     	
-		boolean result = shoppingCartService.checkStock();
-		if(result) {
-			return "redirect:/order";
-		}
-		else {
-			redirectAttributes.addFlashAttribute("outOfStockMessage", OUT_OF_STOCK);
-			return "redirect:/index";
-		}
-    }
-    
+    	boolean result = shoppingCartService.checkStock();
+    	boolean orderResult = shoppingCartService.checkOrder();
+    	if(orderResult && result) {
+    		return "redirect:/order";
+    	}else{
+    		redirectAttributes.addFlashAttribute("order_message", NULL_ORDER);
+    		return "redirect:/index";
+    		}
+    	}
 }

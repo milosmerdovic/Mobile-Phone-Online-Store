@@ -18,4 +18,5 @@ public interface ShoppingCartService {
     void printCart();
     void finishOrder();
     boolean checkStock();
+    boolean checkOrder();
     }

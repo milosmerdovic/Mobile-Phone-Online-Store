@@ -5,7 +5,6 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: navbar"></div>
-	
 	<form th:action="@{/createOrder/}" th:object="${order}" method="post">
 		<div class="form-group">
 	        <label for="customerName">First Name</label>
