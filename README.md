@@ -34,6 +34,7 @@ OS name: "linux", version: "5.4.0-74-generic", arch: "amd64", family: "unix"
 ````
 #### **Using the maven plugin**
 * The Spring Boot Maven plugin includes a run goal that can be used to quickly compile and run your application. Applications run in an exploded form, as they do in your IDE. The following example shows a typical Maven command to run a Spring Boot application:
+
 `$ mvn spring-boot:run`
 
 In `/src/main/resources/application.properties` file it is possible to change datasource url as well as port, username and password if it is included.
