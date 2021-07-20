@@ -100,6 +100,7 @@ body {
 }
 
 .grid-item :hover{
+    
     background-color: #86b1df;
     transition: 0.3s;
 }
@@ -129,7 +130,6 @@ body {
 .form-group{
 	max-width: 50%;
     margin-left: 25%;
-    
 }
 
 .footer {
