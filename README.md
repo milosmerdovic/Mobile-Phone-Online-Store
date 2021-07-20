@@ -13,7 +13,15 @@ Users can shop for products. Each user has his own shopping cart (session functi
 * On click **Add to cart** button populate **Shopping cart** with desired products. Before checking out there is a method which checks weater is there enough products in databases or if the cart is empty. You can checkout only if cart are fullfilled with items and there is enough products in stock(database). Checkout leads you to order page. There, you give yours basic info for the shipment. On a successful order you wll be fedirected on home page with a message **Your shipment has been sent**.
 
 ## Technologies
-* It was made using **Spring Boot**, **Spring Security**, **Thymeleaf**, **Spring Data JPA**, **Hibernate**, **Spring Data REST** and **Bootstrap** for style. Database is **MySQL**.
+  ####It was made using: 
+* **Spring Boot**; 
+* **Spring Security**; 
+* **Thymeleaf**; 
+* **Spring Data JPA**; 
+* **Hibernate**;
+* **Spring Data REST**;
+* **Bootstrap** for style;
+* Database is **MySQL**.
 
 ## How To Run
 * Once the app starts, go to the web browser and visit `http://localhost:8080/` , `http://localhost:8080/home` or `http://localhost:8080/index`
