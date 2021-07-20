@@ -10,6 +10,8 @@
 * This is a demo project for practicing Spring + Thymeleaf. The idea was to build some basic web app.
 Users can shop for products. Each user has his own shopping cart (session functionality). Checkout is transactional, users are anonymous.
 
+* On click **Add to cart** button populate **Shopping cart** with desired products. Before checking out there is a method which checks weater is there enough products in databases or if the cart is empty. You can checkout only if cart are fullfilled with items and there is enough products in stock(database). Checkout leads you to order page. There, you give yours basic info for the shipment. On a successful order you wll be fedirected on home page with a message **Your shipment has been sent**.
+
 ## Technologies
 * It was made using **Spring Boot**, **Spring Security**, **Thymeleaf**, **Spring Data JPA**, **Hibernate**, **Spring Data REST** and **Bootstrap** for style. Database is **MySQL**.
 
@@ -38,4 +40,4 @@ OS name: "linux", version: "5.4.0-74-generic", arch: "amd64", family: "unix"
 `$ mvn spring-boot:run`
 
 
-In `/src/main/resources/application.properties` file it is possible to change datasource url as well as port, username and password if it is included.
+In `/src/main/resources/application.properties` file it is possible to change datasource url as well as port, username and password if they are included.
