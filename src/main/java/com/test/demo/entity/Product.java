@@ -14,24 +14,23 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name")
     private String name;
     
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
     private BigDecimal price;
     
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "quantity")
     @Min(value = 0, message = "*Quantity has to be non negative number")
     private Integer quantity;
 
     private String path;
     
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,10 +54,10 @@ public class Product {
     public void setPath(String path) {
         this.path = path;
     }
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
