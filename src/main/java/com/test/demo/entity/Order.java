@@ -1,5 +1,6 @@
 package com.test.demo.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class Order {
 	@Column(name = "email", nullable = false)
 	private String customerEmail;
 	
+	private BigDecimal total;
 	@Column(name = "created_at")
 	private LocalDateTime createdAt = LocalDateTime.now();
 	
@@ -51,6 +53,13 @@ public class Order {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public BigDecimal getTotal() {
+		return total;
+	}
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 	
 	public String getCustomerName() {

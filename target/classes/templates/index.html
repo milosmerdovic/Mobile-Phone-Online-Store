@@ -6,8 +6,8 @@
 
 <body>
     <div th:replace="fragments/header :: navbar"></div>
-    <div class="alert alert-success" role="alert" style="text-align: center;" th:if="${message}" th:text="${message}" />
-    <div class="alert alert-info" role="alert" style="text-align: center;" th:if="${outOfStockMessage}" th:text="${outOfStockMessage}" />
+    <div class="alert alert-success" role="alert" style="text-align: center;" th:if="${success_message}" th:text="${success_message}" />
+    <div class="alert alert-info" role="alert" style="text-align: center;" th:if="${empty_stock}" th:text="${empty_stock}" />
     <div class="alert alert-info" role="alert" style="text-align: center;" th:if="${order_message}" th:text="${order_message}" />
     <div class="window-section">
         <div class="container">

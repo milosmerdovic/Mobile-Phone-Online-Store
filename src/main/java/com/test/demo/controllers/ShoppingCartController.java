@@ -16,8 +16,8 @@ public class ShoppingCartController {
     
     private final ShoppingCartService shoppingCartService;
     private final ProductService productService;
-	private static final String NULL_ORDER = "You haven't ordered yet or there is not enough products in stock!";
-
+	private static final String NULL_ORDER = "You haven't ordered yet!";
+	private static final String NotEnoughProductInStock = "There is not enough products in stock!";
 
     @Autowired
     public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService) {
@@ -26,9 +26,16 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/shoppingCart/addProduct/{id}")
-    public String addProductToCart(@PathVariable("id") Long id) {
+    public String addProductToCart(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         productService.findById(id).ifPresent(shoppingCartService::addProduct);
+        boolean result = shoppingCartService.checkStock();
+        if(result) {
+        	return "redirect:/index";
+        }else {	
+        redirectAttributes.addFlashAttribute("empty_stock", NotEnoughProductInStock);
+        shoppingCartService.emptyCart();
         return "redirect:/index";
+        }
     }
 
     @GetMapping("/shoppingCart/removeProduct/{id}")
@@ -39,10 +46,8 @@ public class ShoppingCartController {
 
     @GetMapping("/shoppingCart/checkout")
     public String checkout(Product product, RedirectAttributes redirectAttributes){
-    	
-    	boolean result = shoppingCartService.checkStock();
     	boolean orderResult = shoppingCartService.checkOrder();
-    	if(orderResult && result) {
+    	if(orderResult) {
     		return "redirect:/order";
     	}else{
     		redirectAttributes.addFlashAttribute("order_message", NULL_ORDER);

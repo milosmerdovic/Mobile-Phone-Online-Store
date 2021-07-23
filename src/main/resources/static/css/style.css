@@ -42,7 +42,6 @@ body {
 
 .pre-header .nav-bar li a {
     color: cornsilk;
-    text-transform: uppercase;
     font-size: 20px;
     text-decoration: none;
 }
@@ -88,29 +87,29 @@ body {
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	grid-gap: 30px;
 	margin-bottom: 40px;
+	padding: 10px;
 }
 
 .grid-item .item{
     padding: 38px;
 	font-size: 20px;
 	display: grid;
-    box-shadow: 10px 10px 5px #b5c1d98a;
-    background-color: #d7e5ec;
-    border-radius: 15px;
+    border: solid 1px gainsboro;
 }
 
 .grid-item :hover{
-    
-    background-color: #86b1df;
+    color: #2d332b;
+    background-color: #84b4e81a;
     transition: 0.3s;
 }
 
 .grid-container{
 	margin-top: 120px;
-	box-shadow: 1px 1px 5px cornflowerblue;
+	box-shadow: 1px 1px 5px #6495ed52;
 	padding: 5px;
-	border-radius: 15px;
-	background-color: #d7e5ec;
+	border-radius: 10px;
+	background-color: #e3f1f938;
+	border: solid 1px darkgray;
 }
 
 .grid-container .row-panel-body{
@@ -130,6 +129,10 @@ body {
 .form-group{
 	max-width: 50%;
     margin-left: 25%;
+}
+
+.login-form{
+	text-align: center;
 }
 
 .footer {

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class OrderController {
 	
-	private static final String Order_Message = "Your shipment has been sent";
+	private static final String Success_Message = "Your shipment has been sent";
     
     private ShoppingCartService shoppingCartService;
     @Autowired
@@ -40,8 +40,9 @@ public class OrderController {
 			  }	
 		  orderRepository.save(order);
 		  order.setOrderItems(shoppingCartService.orderItems(order));
+		  order.setTotal(shoppingCartService.totalPrice());
 		  shoppingCartService.finishOrder();
-		  redirectAttributes.addFlashAttribute("message", Order_Message);
+		  redirectAttributes.addFlashAttribute("success_message", Success_Message);
 		  return "redirect:/index";
 		  }
 }

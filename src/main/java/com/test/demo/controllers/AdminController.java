@@ -10,16 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.test.demo.entity.Order;
 import com.test.demo.entity.Product;
+import com.test.demo.repository.OrderRepository;
 import com.test.demo.repository.ProductRepository;
 
 @Controller
 public class AdminController {
 	
 	private final ProductRepository productRepository;
+	private final OrderRepository orderRepository;
 	
 	@Autowired
-	public AdminController(ProductRepository productRepository) {
+	public AdminController(ProductRepository productRepository, OrderRepository orderRepository) {
+		this.orderRepository = orderRepository;
 		this.productRepository = productRepository;
 	}
 	
@@ -27,6 +31,11 @@ public class AdminController {
 	public String goToAdminPage(Model model) {
 	model.addAttribute("AllProducts", productRepository.findAll());	
 		return "admin/admin";
+	}
+	
+	@GetMapping("/admin/back")
+	public String goBackButton() {
+		return "redirect:/admin";
 	}
 	
 	@GetMapping("/admin/add-item")
@@ -70,10 +79,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 	
-	/* Administrator for orders controller */
-	
 	@GetMapping("/admin/orders")
-	public String showOrdersForm() {
+	public String showOrders(Model model, Order order) {
+		model.addAttribute("orders", orderRepository.findAll());
 		return "admin/orders";
 	}
 	

@@ -107,6 +107,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		}
 		return true;
 	}
+	@Override
+	public void emptyCart() {
+		productRepository.flush();
+	    products.clear();
+	    items.clear();
+	}
 	
 	@Override
 	public boolean checkOrder() {
