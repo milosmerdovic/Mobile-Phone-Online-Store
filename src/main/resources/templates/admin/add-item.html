@@ -12,7 +12,7 @@
     <h2 class="mb-3">New Product</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" method="post" th:action="@{/add-item}" th:object="${product}">
+            <form action="#" method="post" th:action="@{/add-item}" th:object="${product}" enctype="multipart/form-data">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Name</label>
@@ -30,9 +30,8 @@
                         <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="path" class="col-form-label">Image Path</label>
-                        <input type="text" th:field="*{path}" class="form-control" id="path" placeholder="Image Path">
-                        <span th:if="${#fields.hasErrors('path')}" th:errors="*{path}" class="text-danger"></span>
+                        <label for="path" class="form-label">Upload item image</label>
+						<input type="file" th:field="*{path}" class="form-control form-control-lg" id="path" accept="image/png, image/jpeg"/>
                     </div>
                 <div class="row">
                     <div class="col-md-6 mt-4">

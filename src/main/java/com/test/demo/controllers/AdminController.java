@@ -1,19 +1,25 @@
 package com.test.demo.controllers;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.test.demo.entity.Order;
 import com.test.demo.entity.Product;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.repository.ProductRepository;
+import com.test.demo.upload.FileUpload;
 
 @Controller
 public class AdminController {
@@ -44,11 +50,15 @@ public class AdminController {
 	}
 	
     @PostMapping("/add-item")
-    public String addUser(@Valid Product product, BindingResult result, Model model) {
+    public String addItem(@Valid Product product, BindingResult result, Model model, @RequestParam("path") MultipartFile multipartFile) throws IOException {
         if (result.hasErrors()) {
             return "admin/add-item";
         }
-        productRepository.save(product);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        product.setPath(fileName);
+        Product savedProduct = productRepository.save(product);
+        String uploadDir = "images/" + savedProduct.getPath();
+        FileUpload.saveFile(uploadDir, fileName, multipartFile);
         model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";
     }
@@ -70,7 +80,10 @@ public class AdminController {
         model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";
     }
+    
+    
 	
+    
 	@GetMapping("/admin/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id, Model model) {
         Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));

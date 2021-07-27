@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="header :: header-css">
+</head>
+
+<body>
+    <div th:fragment="main-content">
+        <div class="row">
+	        <div class="col-md-8" >
+		        <div class="all-products">
+		            <h3>All Products</h3>
+		            <div class="grid-item">
+		                    <div class="item" th:each="product :${allProducts}">
+		                            <img th:src="${product.path}"><br/> 
+		                            [[${product.name}]]<br/>
+		                            <p>[[${product.price}]] e</p>
+		                            <p>In stock: [[${product.quantity}]]</p><br/>
+		                            <a href="#" th:href="@{/shoppingCart/addProduct/{id}(id=${product.id})}" class="btn btn-primary">
+		                                <i class="fas fa-shopping-cart" th:disabled="${product.quantity eq 0}"> Add to cart</i></a>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+                <div th:replace="fragments/shoppingCart :: shopping-cart"></div>
+            </div>
+		</div>
+	</div>
+</body>
+</html>
