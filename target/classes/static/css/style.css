@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+	font-family: 'Nunito', sans-serif;
+    box-sizing: border-box; 
+}
+img {
+    width: 50%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+body {
+    background-color: #f9f9f9;
+}
+
+.pre-header {
+    background-color: #0071dc;
+    height: 60px;
+    color: dimgray;
+    padding-top: 15px;
+    
+}
+
+.pre-header .logo {
+	display: block ruby;
+	text-transform: uppercase;
+	max-width: 20%;
+}
+.pre-header .logo p{
+	color: cornsilk;
+	font-size: 20px;
+}
+.pre-header .logo img{
+	max-width: 39px;
+}
+
+.pre-header .nav-bar li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.pre-header .nav-bar li a {
+    color: cornsilk;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.pre-header .nav-bar {
+    text-align: right;
+    max-width: 80%;
+}
+
+.window-section {
+    background-image: url("../images/pozadina.jpg");
+    background-position:center;
+    padding-top: 225px;
+    padding-bottom: 135px;
+    background-size: cover;
+    margin-top: 70px;
+}
+
+.window-section h1 {
+    color: cornsilk;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.window-section p {
+    color: cornsilk;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.all-products h3 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+   
+}
+
+.grid-item {
+	display: grid;
+	text-align: center;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-gap: 30px;
+	margin-bottom: 40px;
+	padding: 10px;
+}
+
+.grid-item .item{
+    padding: 38px;
+	font-size: 20px;
+	display: grid;
+    border: solid 1px gainsboro;
+}
+
+.grid-item :hover{
+    color: #2d332b;
+    background-color: #84b4e81a;
+    transition: 0.3s;
+}
+
+.grid-container{
+	margin-top: 120px;
+	box-shadow: 1px 1px 5px #6495ed52;
+	padding: 5px;
+	border-radius: 10px;
+	background-color: #e3f1f938;
+	border: solid 1px darkgray;
+}
+
+.grid-container .row-panel-body{
+	margin-bottom: 20px;
+}
+
+.grid-container .panel-default-well{
+	padding-left: 15px;
+}
+
+.grid-container h2{
+	margin-top: 20px;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.form-group{
+	max-width: 50%;
+    margin-left: 25%;
+}
+
+.login-form{
+	text-align: center;
+}
+
+.footer {
+   	background-color: #0071dc;
+	color: cornsilk;
+	text-align: center;
+	margin-top: 20px;
+	padding-top: 10px;
+	font-size: 20px;
+}
+
+
+

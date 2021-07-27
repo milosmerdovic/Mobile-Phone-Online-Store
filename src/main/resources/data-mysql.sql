@@ -1,4 +1,11 @@
-
+CREATE TABLE `products` (
+  `id` bigint NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
 
 INSERT IGNORE INTO products (id, name, path, price, quantity)
 VALUES (1, 'Mobile Phone 1', 'images/product1.png', 150.00, 15);
