@@ -10,7 +10,7 @@ import javax.validation.constraints.Min;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -24,8 +24,9 @@ public class Product {
     @Column(name = "quantity")
     @Min(value = 0, message = "*Quantity has to be non negative number")
     private Integer quantity;
-
-    private String path;
+    
+    @Column(nullable = true, length = 64)
+    private String photos;
     
     public Long getId() {
         return id;
@@ -48,11 +49,11 @@ public class Product {
         this.price = price;
     }
     
-    public String getPath() {
-        return path;
+    public String getPhotos() {
+        return photos;
     }
-    public void setPath(String path) {
-        this.path = path;
+    public void setPhotos(String photos) {
+        this.photos = photos;
     }
     public Integer getQuantity() {
         return quantity;
