@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.test.demo.entity.Order;
 import com.test.demo.entity.Product;
@@ -26,7 +23,7 @@ import com.test.demo.upload.FileUpload;
 
 @Controller
 public class AdminController {
-	
+
 	private final ProductRepository productRepository;
 	private final OrderRepository orderRepository;
 	
@@ -53,18 +50,19 @@ public class AdminController {
 	}
 	
     @PostMapping("/add-item")
-    public ResponseEntity addItem(@Valid Product product, BindingResult result,@RequestParam("file") MultipartFile file){
-        if (result.hasErrors()) {
-            return ResponseEntity.ok("admin/add-item");
+    public String addItem(@Valid Product product, BindingResult result, @RequestParam("file") MultipartFile file) throws IOException {
+        if (result.hasErrors() || file.isEmpty()) {
+            return "admin/add-item";
         }
+
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         product.setPhotos(fileName);
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-			.path("images/")
-			.path(fileName).path("/add-item")
-			.toUriString();
+        String uploadDir = "src/main/resources/static/images";
+        
+        FileUpload.saveFile(uploadDir, fileName, file);
+
         productRepository.save(product);
-        return ResponseEntity.ok(fileDownloadUri);
+        return "redirect:/admin";
     }
 	
     @GetMapping("/admin/edit/{id}")

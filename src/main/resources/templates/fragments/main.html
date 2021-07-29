@@ -12,13 +12,13 @@
                     <h3>All Products</h3>
                     <div class="grid-item">
                         <div class="item" th:each="product :${allProducts}">
-                            <img th:src="${product.photos}">
+                            <img th:src="@{${product.getPhotosImagePath}}">
                             <br/> [[${product.name}]]
                             <br/>
                             <p>[[${product.price}]] e</p>
                             <p>In stock: [[${product.quantity}]]</p><br/>
                             <a href="#" th:href="@{/shoppingCart/addProduct/{id}(id=${product.id})}" class="btn btn-primary">
-                                <i class="fas fa-shopping-cart" th:disabled="${product.quantity eq 0}"> Add to cart</i></a>
+                                <i class="fas fa-shopping-cart"> Add to cart</i></a>
                         </div>
                     </div>
                 </div>
