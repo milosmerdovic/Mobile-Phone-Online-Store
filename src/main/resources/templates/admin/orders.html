@@ -60,8 +60,8 @@
                             <td th:text="${order.customerAddress}"></td>
                             <td th:text="${order.customerEmail}"></td>
                             <td th:each="item : ${order.orderItems}">
-                                <td th:text="${item.getProduct().getName()}"></td>
-                                <p>Quantity:<td th:text="${item.getQty()}"></td>
+                                <span th:text="${item.getProduct().getName()}"></span>
+                                <p>Quantity:<span th:text="${item.getQty()}"></span>
                                 </p>
                             </td>
                             <td th:text="${order.total}"></td>

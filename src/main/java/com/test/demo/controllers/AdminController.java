@@ -23,8 +23,9 @@ import com.test.demo.upload.FileUpload;
 
 @Controller
 public class AdminController {
-
+    @Autowired
 	private final ProductRepository productRepository;
+    @Autowired
 	private final OrderRepository orderRepository;
 	
 	@Autowired
@@ -73,11 +74,17 @@ public class AdminController {
     }
     
     @PostMapping("/admin/update/{id}")
-    public String updateProduct(@PathVariable("id") long id, @Valid Product product, BindingResult result, Model model) {
+    public String updateProduct(@PathVariable("id") long id, @Valid Product product, BindingResult result, Model model, @RequestParam("file") MultipartFile file) throws IOException  {
         if (result.hasErrors()) {
             product.setId(id);
             return "admin/update";
         }
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        product.setPhotos(fileName);
+        String uploadDir = "src/main/resources/static/images";
+        
+        FileUpload.saveFile(uploadDir, fileName, file);
+
         productRepository.save(product);
         model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";
