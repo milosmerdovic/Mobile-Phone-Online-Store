@@ -144,5 +144,16 @@ body {
 	font-size: 20px;
 }
 
+.orders-section th {
+    padding-top: 10px;
+    background-color: #04AA6D;
+    color: white;
+    
+}
 
 
+.table-responsive {
+    margin-top: 5%;
+
+}
+  

@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -42,7 +46,12 @@ public class Order {
 	private String customerEmail;
 	
 	private BigDecimal total;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
+	
 	@Column(name = "created_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdAt = LocalDateTime.now();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
@@ -68,7 +77,7 @@ public class Order {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
+	
 	public String getCustomerLastName() {
 		return customerLastName;
 	}
@@ -103,5 +112,12 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
-
+	
+	public Status getStatus() {
+		return this.status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+		}
+	
 }

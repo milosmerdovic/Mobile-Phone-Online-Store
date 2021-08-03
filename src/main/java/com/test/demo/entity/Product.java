@@ -76,10 +76,10 @@ public class Product {
     public int hashCode() {
         return id.hashCode();
     }
+
     @Transient
     public String getPhotosImagePath() {
         if (photos == null || id == null) return null;
-         
         return "images/" + photos;
     }
 }

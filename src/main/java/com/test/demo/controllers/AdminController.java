@@ -17,12 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.test.demo.entity.Order;
 import com.test.demo.entity.Product;
+import com.test.demo.entity.Status;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.repository.ProductRepository;
 import com.test.demo.upload.FileUpload;
 
 @Controller
 public class AdminController {
+    
     @Autowired
 	private final ProductRepository productRepository;
     @Autowired
@@ -99,9 +101,30 @@ public class AdminController {
     }
 	
 	@GetMapping("/admin/orders")
-	public String showOrders(Model model, Order order) {
+	public String showOrders(Model model) {
 		model.addAttribute("orders", orderRepository.findAll());
 		return "admin/orders";
 	}
+    @GetMapping("/admin/send/{id}")
+    public String switchStatusSend(Order order, @PathVariable("id") int id){
+        order = orderRepository.findById(id);
+        order.setStatus(Status.SENT);
+        orderRepository.save(order);
+        return "redirect:/admin/orders";
+    }
+    @GetMapping("/admin/return/{id}")
+    public String switchStatusReturned(Order order, @PathVariable("id") int id){
+        order = orderRepository.findById(id);
+        order.setStatus(Status.RETURNED);
+        orderRepository.save(order);
+        return "redirect:/admin/orders";
+    }
+    @GetMapping("/admin/finish/{id}")
+    public String switchStatusFinished(Order order, @PathVariable("id") int id){
+        order = orderRepository.findById(id);
+        order.setStatus(Status.FINISHED);
+        orderRepository.save(order);
+        return "redirect:/admin/orders";
+    }
 	
 }

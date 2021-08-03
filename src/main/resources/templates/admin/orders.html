@@ -38,7 +38,7 @@
     <div class="container">
         <div class="row">
             <div class="orders-section">
-                <table class="table table-striped table-responsive-md">
+                <table class="table table-striped table-responsive">
                     <thead>
                         <tr>
                             <th>Order Number</th>
@@ -49,6 +49,8 @@
                             <th>Email</th>
                             <th>Ordered Item</th>
                             <th>Total Price</th>
+                            <th>Status</th>
+                            <th>Status change</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,11 +62,16 @@
                             <td th:text="${order.customerAddress}"></td>
                             <td th:text="${order.customerEmail}"></td>
                             <td th:each="item : ${order.orderItems}">
-                                <span th:text="${item.getProduct().getName()}"></span>
-                                <p>Quantity:<span th:text="${item.getQty()}"></span>
-                                </p>
+                                <p>Product Name: <span th:text="${item.getProduct().getName()}"></span></p><br>
+                                <p>Quantity: <span th:text="${item.getQty()}"></span></p>
                             </td>
                             <td th:text="${order.total}"></td>
+                            <td th:text="${order.status}"></td>
+                            <td>
+                                <a th:href="@{/admin/send/{id}(id=${order.id})}" class="btn btn-success">Send</a>
+                                <a th:href="@{/admin/return/{id}(id=${order.id})}" class="btn btn-info">Returned</a>
+                                <a th:href="@{/admin/finish/{id}(id=${order.id})}" class="btn btn-secondary">Finished</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

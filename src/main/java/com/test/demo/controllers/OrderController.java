@@ -1,6 +1,7 @@
 package com.test.demo.controllers;
 
 import com.test.demo.entity.Order;
+import com.test.demo.entity.Status;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.service.ShoppingCartService;
 
@@ -41,6 +42,7 @@ public class OrderController {
 		  orderRepository.save(order);
 		  order.setOrderItems(shoppingCartService.orderItems(order));
 		  order.setTotal(shoppingCartService.totalPrice());
+          order.setStatus(Status.ORDERED);
 		  shoppingCartService.finishOrder();
 		  redirectAttributes.addFlashAttribute("success_message", Success_Message);
 		  return "redirect:/index";

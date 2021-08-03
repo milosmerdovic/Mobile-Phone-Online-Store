@@ -7,5 +7,4 @@ import com.test.demo.entity.OrderItem;
 
 @Repository
 public interface OrderItemsRepository extends JpaRepository<OrderItem, Integer>{
-
 }

@@ -7,5 +7,5 @@ import com.test.demo.entity.Order;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer>{
-
+    Order findById(int id);
 }

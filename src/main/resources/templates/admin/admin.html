@@ -26,7 +26,9 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Path Image</th>
+                    <th>Photo</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +46,6 @@
                         <a th:href="@{/admin/delete/{id}(id=${product.id})}" class="btn btn-danger">
                             <i class="fas fa-trash"></i></a>
                     </td>
-
                 </tr>
             </tbody>
         </table>
