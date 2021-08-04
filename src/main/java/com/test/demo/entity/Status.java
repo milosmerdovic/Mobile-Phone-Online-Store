@@ -5,7 +5,8 @@ public enum Status {
     ORDERED("Ordered"),
     SENT("Sent"),
     RETURNED("Returned"),
-    FINISHED("Finished");
+    FINISHED("Finished"),
+    CANCELED("Canceled");
 
     private final String displayValue;
     

@@ -1,6 +1,7 @@
 package com.test.demo.controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 
@@ -57,7 +58,6 @@ public class AdminController {
         if (result.hasErrors() || file.isEmpty()) {
             return "admin/add-item";
         }
-
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         product.setPhotos(fileName);
         String uploadDir = "src/main/resources/static/images";
@@ -95,6 +95,7 @@ public class AdminController {
 	@GetMapping("/admin/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id, Model model) {
         Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        
         productRepository.delete(product);
         model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";
@@ -105,10 +106,12 @@ public class AdminController {
 		model.addAttribute("orders", orderRepository.findAll());
 		return "admin/orders";
 	}
+
     @GetMapping("/admin/send/{id}")
     public String switchStatusSend(Order order, @PathVariable("id") int id){
         order = orderRepository.findById(id);
         order.setStatus(Status.SENT);
+        order.setSent(LocalDateTime.now());
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }
@@ -116,6 +119,7 @@ public class AdminController {
     public String switchStatusReturned(Order order, @PathVariable("id") int id){
         order = orderRepository.findById(id);
         order.setStatus(Status.RETURNED);
+        order.setReturned(LocalDateTime.now());
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }
@@ -123,6 +127,15 @@ public class AdminController {
     public String switchStatusFinished(Order order, @PathVariable("id") int id){
         order = orderRepository.findById(id);
         order.setStatus(Status.FINISHED);
+        order.setFinished(LocalDateTime.now());
+        orderRepository.save(order);
+        return "redirect:/admin/orders";
+    }
+    @GetMapping("/admin/canceled/{id}")
+    public String switchStatusClosed(Order order, @PathVariable("id") int id){
+        order = orderRepository.findById(id);
+        order.setStatus(Status.CANCELED);
+        order.setCanceled(LocalDateTime.now());
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }

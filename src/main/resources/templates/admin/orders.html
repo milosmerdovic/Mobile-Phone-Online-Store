@@ -68,9 +68,19 @@
                             <td th:text="${order.total}"></td>
                             <td th:text="${order.status}"></td>
                             <td>
-                                <a th:href="@{/admin/send/{id}(id=${order.id})}" class="btn btn-success">Send</a>
-                                <a th:href="@{/admin/return/{id}(id=${order.id})}" class="btn btn-info">Returned</a>
-                                <a th:href="@{/admin/finish/{id}(id=${order.id})}" class="btn btn-secondary">Finished</a>
+                                <span th:if="${order.status == T(com.test.demo.entity.Status).ORDERED}">
+                                    <a th:href="@{/admin/send/{id}(id=${order.id})}" class="btn btn-success">Send</a>
+                                </span>
+                                <span th:if="${order.status == T(com.test.demo.entity.Status).SENT}">
+                                    <a th:href="@{/admin/return/{id}(id=${order.id})}" class="btn btn-info">Returned</a>
+                                    <a th:href="@{/admin/finish/{id}(id=${order.id})}" class="btn btn-secondary">Finished</a>
+                                </span>
+                                <span th:if="${order.status == T(com.test.demo.entity.Status).RETURNED}">
+                                    <a th:href="@{/admin/send/{id}(id=${order.id})}" class="btn btn-success">Send</a>
+                                    <a th:href="@{/admin/canceled/{id}(id=${order.id})}" class="btn btn-danger">Canceled</a>
+                                </span>
+                                <span th:if="${order.status == T(com.test.demo.entity.Status).FINISHED}"> Order is finished </span>
+                                <span th:if="${order.status == T(com.test.demo.entity.Status).CANCELED}"> Order is canceled </span>
                             </td>
                         </tr>
                     </tbody>
