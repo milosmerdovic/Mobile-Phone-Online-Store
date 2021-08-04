@@ -5,6 +5,34 @@
     <body>
         <div th:replace="fragments/header :: navbar"></div>
 
+        <div class="container">
+            <div class="row">
+                <div class="history-orders">
+                    <table class="table table-striped table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Order number</th>
+                                <th>Ordered date</th>
+                                <th>Sent date</th>
+                                <th>Returned date</th>
+                                <th>Finished date</th>
+                                <th>Canceled date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="order : ${history}">
+                                <td th:text="${order.id}"></td>
+                                <td th:text="${order.createdAt}"></td>
+                                <td th:text="${order.sent}"></td>
+                                <td th:text="${order.returned}"></td>
+                                <td th:text="${order.finished}"></td>
+                                <td th:text="${order.canceled}"></td>
+                            </tr>    
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+        </div>
 
         <div th:replace="fragments/footer :: footer"></div>
     </body>

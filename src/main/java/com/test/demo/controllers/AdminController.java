@@ -106,6 +106,11 @@ public class AdminController {
 		model.addAttribute("orders", orderRepository.findAll());
 		return "admin/orders";
 	}
+    @GetMapping("/admin/status-log")
+    public String showStatusLog(Model model){
+        model.addAttribute("history", orderRepository.findAll());
+        return "admin/status-log";
+    }
 
     @GetMapping("/admin/send/{id}")
     public String switchStatusSend(Order order, @PathVariable("id") int id){
