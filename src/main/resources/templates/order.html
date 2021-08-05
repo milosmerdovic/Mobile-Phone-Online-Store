@@ -30,7 +30,7 @@
 	</form>    	
 		<div class="products-section" style="margin-left: 25%; margin-top: 50px;">
 			<div th:each="product : ${products.entrySet()}">
-			<div th:text="${product.getKey().name}" >Title</div>
+			<div th:text="${product.getKey().name}" ><p>Products: </p>Title</div>
 			<div th:inline="text">Quantity: [[${product.getValue()}]]</div>
 			</div>
 		</div>

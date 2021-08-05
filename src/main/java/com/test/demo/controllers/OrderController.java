@@ -2,7 +2,9 @@ package com.test.demo.controllers;
 
 import com.test.demo.entity.Order;
 import com.test.demo.entity.Status;
+import com.test.demo.entity.StatusHistory;
 import com.test.demo.repository.OrderRepository;
+import com.test.demo.repository.StatusHistoryRepository;
 import com.test.demo.service.ShoppingCartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class OrderController {
     private ShoppingCartService shoppingCartService;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private StatusHistoryRepository historyRepository;
 
     OrderController(ShoppingCartService shoppingCartService){
         this.shoppingCartService = shoppingCartService;
@@ -35,7 +39,7 @@ public class OrderController {
     }
     
 	  @PostMapping("/createOrder")
-	  public String finishOrder(Order order, BindingResult result, RedirectAttributes redirectAttributes){
+	  public String finishOrder(StatusHistory history, Order order, BindingResult result, RedirectAttributes redirectAttributes){
 		  if (result.hasErrors()) {
 			  return "redirect:/order"; 
 			  }	
@@ -43,6 +47,8 @@ public class OrderController {
 		  order.setOrderItems(shoppingCartService.orderItems(order));
 		  order.setTotal(shoppingCartService.totalPrice());
           order.setStatus(Status.ORDERED);
+          history.setOrder(order);
+          historyRepository.save(history);
 		  shoppingCartService.finishOrder();
 		  redirectAttributes.addFlashAttribute("success_message", Success_Message);
 		  return "redirect:/index";

@@ -19,8 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.test.demo.entity.Order;
 import com.test.demo.entity.Product;
 import com.test.demo.entity.Status;
+import com.test.demo.entity.StatusHistory;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.repository.ProductRepository;
+import com.test.demo.repository.StatusHistoryRepository;
 import com.test.demo.upload.FileUpload;
 
 @Controller
@@ -30,11 +32,15 @@ public class AdminController {
 	private final ProductRepository productRepository;
     @Autowired
 	private final OrderRepository orderRepository;
+        
+    @Autowired
+    private final StatusHistoryRepository historyRepository;
 	
 	@Autowired
-	public AdminController(ProductRepository productRepository, OrderRepository orderRepository) {
+	public AdminController(ProductRepository productRepository, OrderRepository orderRepository, StatusHistoryRepository historyRepository) {
 		this.orderRepository = orderRepository;
 		this.productRepository = productRepository;
+        this.historyRepository = historyRepository;
 	}
 	
 	@GetMapping("/admin")
@@ -108,39 +114,66 @@ public class AdminController {
 	}
     @GetMapping("/admin/status-log")
     public String showStatusLog(Model model){
-        model.addAttribute("history", orderRepository.findAll());
+        model.addAttribute("history", historyRepository.findAll());
         return "admin/status-log";
     }
 
     @GetMapping("/admin/send/{id}")
     public String switchStatusSend(Order order, @PathVariable("id") int id){
+        StatusHistory history = new StatusHistory();
+
         order = orderRepository.findById(id);
         order.setStatus(Status.SENT);
-        order.setSent(LocalDateTime.now());
+
+        history.setOrder(order);
+        history.setSent(LocalDateTime.now());
+
+        historyRepository.save(history);
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }
+
     @GetMapping("/admin/return/{id}")
     public String switchStatusReturned(Order order, @PathVariable("id") int id){
+        StatusHistory history = new StatusHistory();
+
         order = orderRepository.findById(id);
         order.setStatus(Status.RETURNED);
-        order.setReturned(LocalDateTime.now());
+
+        history.setOrder(order);
+        history.setReturned(LocalDateTime.now());
+
+        historyRepository.save(history);
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }
+    
     @GetMapping("/admin/finish/{id}")
     public String switchStatusFinished(Order order, @PathVariable("id") int id){
+        StatusHistory history = new StatusHistory();
+
         order = orderRepository.findById(id);
         order.setStatus(Status.FINISHED);
-        order.setFinished(LocalDateTime.now());
+        
+        history.setOrder(order);
+        history.setFinished(LocalDateTime.now());
+        
+        historyRepository.save(history);
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }
+
     @GetMapping("/admin/canceled/{id}")
     public String switchStatusClosed(Order order, @PathVariable("id") int id){
+        StatusHistory history = new StatusHistory();
+
         order = orderRepository.findById(id);
         order.setStatus(Status.CANCELED);
-        order.setCanceled(LocalDateTime.now());
+
+        history.setOrder(order);
+        history.setCanceled(LocalDateTime.now());
+        
+        historyRepository.save(history);
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }

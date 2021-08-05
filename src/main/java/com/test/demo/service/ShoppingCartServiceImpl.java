@@ -29,6 +29,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     private Map<Product, Integer> products = new HashMap<>();
     private List<OrderItem> items = new ArrayList<>();
+    
     @Autowired
     private OrderItemsRepository orderItemsRepository;
     @Autowired

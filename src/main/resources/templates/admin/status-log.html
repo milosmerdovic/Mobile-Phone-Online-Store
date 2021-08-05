@@ -21,8 +21,8 @@
                         </thead>
                         <tbody>
                             <tr th:each="order : ${history}">
-                                <td th:text="${order.id}"></td>
-                                <td th:text="${order.createdAt}"></td>
+                                <td th:text="${order.order.id}"></td>
+                                <td th:text="${order.order.createdAt}"></td>
                                 <td th:text="${order.sent}"></td>
                                 <td th:text="${order.returned}"></td>
                                 <td th:text="${order.finished}"></td>

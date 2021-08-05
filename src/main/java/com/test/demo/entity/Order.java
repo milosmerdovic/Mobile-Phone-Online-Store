@@ -53,26 +53,10 @@ public class Order {
 	@Column(name = "created_at")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdAt = LocalDateTime.now();
-
-	@Column(name = "sent")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime sent;
-
-	@Column(name = "returned")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime returned;
-	
-	@Column(name = "finished")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime finished;
-	
-	@Column(name = "canceled")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime canceled;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
 	private List<OrderItem> orderItems;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -134,34 +118,6 @@ public class Order {
 	}
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-	
-	public LocalDateTime getSent() {
-		return this.sent;
-	}
-	public void setSent(LocalDateTime sent) {
-		this.sent = sent;
-	}
-	
-	public LocalDateTime getReturned() {
-		return this.returned;
-	}
-	public void setReturned(LocalDateTime returned) {
-		this.returned = returned;
-	}
-	
-	public LocalDateTime getFinished() {
-		return this.finished;
-	}
-	public void setFinished(LocalDateTime finished) {
-		this.finished = finished;
-	}
-	
-	public LocalDateTime getCanceled() {
-		return this.canceled;
-	}
-	public void setCanceled(LocalDateTime canceled) {
-		this.canceled = canceled;
 	}
 
 }
