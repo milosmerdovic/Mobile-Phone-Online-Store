@@ -87,21 +87,27 @@ public class AdminController {
             product.setId(id);
             return "admin/update";
         }
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        product.setPhotos(fileName);
-        String uploadDir = "src/main/resources/static/images";
-        
-        FileUpload.saveFile(uploadDir, fileName, file);
 
+        if (!file.isEmpty()){
+            
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            product.setPhotos(fileName);
+            String uploadDir = "src/main/resources/static/images";
+        
+            FileUpload.saveFile(uploadDir, fileName, file);
+        }
         productRepository.save(product);
-        model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";
     }
     
 	@GetMapping("/admin/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id, Model model) {
         Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        /*
+
+            napraviti metodu koja otkazuje brisanje proizvoda u slucaju da postoji u porudzbini
         
+            */
         productRepository.delete(product);
         model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";
@@ -112,9 +118,11 @@ public class AdminController {
 		model.addAttribute("orders", orderRepository.findAll());
 		return "admin/orders";
 	}
-    @GetMapping("/admin/status-log")
-    public String showStatusLog(Model model){
-        model.addAttribute("history", historyRepository.findAll());
+    @GetMapping("/admin/status-log/{id}")
+    public String showStatusLog(Order order, StatusHistory history, @PathVariable("id") int id, Model model){
+        order = orderRepository.findById(id);
+        history.setOrder(order);
+        model.addAttribute("history", historyRepository.findByOrder(order));
         return "admin/status-log";
     }
 
@@ -126,7 +134,8 @@ public class AdminController {
         order.setStatus(Status.SENT);
 
         history.setOrder(order);
-        history.setSent(LocalDateTime.now());
+        history.setStatus(order.getStatus());
+        history.setDateTime(LocalDateTime.now());
 
         historyRepository.save(history);
         orderRepository.save(order);
@@ -141,13 +150,14 @@ public class AdminController {
         order.setStatus(Status.RETURNED);
 
         history.setOrder(order);
-        history.setReturned(LocalDateTime.now());
+        history.setStatus(order.getStatus());
+        history.setDateTime(LocalDateTime.now());
 
         historyRepository.save(history);
         orderRepository.save(order);
         return "redirect:/admin/orders";
     }
-    
+
     @GetMapping("/admin/finish/{id}")
     public String switchStatusFinished(Order order, @PathVariable("id") int id){
         StatusHistory history = new StatusHistory();
@@ -156,7 +166,8 @@ public class AdminController {
         order.setStatus(Status.FINISHED);
         
         history.setOrder(order);
-        history.setFinished(LocalDateTime.now());
+        history.setStatus(order.getStatus());
+        history.setDateTime(LocalDateTime.now());
         
         historyRepository.save(history);
         orderRepository.save(order);
@@ -171,7 +182,8 @@ public class AdminController {
         order.setStatus(Status.CANCELED);
 
         history.setOrder(order);
-        history.setCanceled(LocalDateTime.now());
+        history.setStatus(order.getStatus());
+        history.setDateTime(LocalDateTime.now());
         
         historyRepository.save(history);
         orderRepository.save(order);

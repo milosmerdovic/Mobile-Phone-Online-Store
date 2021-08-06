@@ -31,6 +31,11 @@
                     <input type="text" th:field="*{quantity}" class="form-control" id="quantity" placeholder="Quantity">
                     <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></span>
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="photos" class="col-form-label">Photo Name</label>
+                    <input type="text" th:field="*{photos}" class="form-control" id="photos" placeholder="Photos">
+                    <span th:if="${#fields.hasErrors('photos')}" th:errors="*{photos}" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label class="form-control-file">Photos: </label>
                     <input type="file" name="file" accept="image/png, image/jpeg" multiple="multiple">

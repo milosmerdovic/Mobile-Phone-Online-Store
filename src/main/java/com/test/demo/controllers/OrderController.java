@@ -48,6 +48,8 @@ public class OrderController {
 		  order.setTotal(shoppingCartService.totalPrice());
           order.setStatus(Status.ORDERED);
           history.setOrder(order);
+          history.setStatus(order.getStatus());
+          history.setDateTime(order.getCreatedAt());
           historyRepository.save(history);
 		  shoppingCartService.finishOrder();
 		  redirectAttributes.addFlashAttribute("success_message", Success_Message);

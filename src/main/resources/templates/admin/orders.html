@@ -35,9 +35,7 @@
         </div>
     </header>
 
-    <a th:href="@{/admin/status-log}" class="col-md-1">
-        <button type="button" class="btn btn-success" th:text="History">History</button>
-    </a>
+   
 
     <div class="container">
         <div class="row">
@@ -54,7 +52,8 @@
                             <th>Ordered Item</th>
                             <th>Total Price</th>
                             <th>Status</th>
-                            <th>Status change</th>
+                            <th>Status Change</th>
+                            <th>Status History</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,7 +65,7 @@
                             <td th:text="${order.customerAddress}"></td>
                             <td th:text="${order.customerEmail}"></td>
                             <td th:each="item : ${order.orderItems}">
-                                <p>Product Name: <span th:text="${item.getProduct().getName()}"></span></p><br>
+                                <p>Product Name: <span th:text="${item.getProduct().getName()}"></span></p></br>
                                 <p>Quantity: <span th:text="${item.getQty()}"></span></p>
                             </td>
                             <td th:text="${order.total}"></td>
@@ -86,6 +85,11 @@
                                 </span>
                                 <span th:if="${order.status == T(com.test.demo.entity.Status).FINISHED}"> Order is finished </span>
                                 <span th:if="${order.status == T(com.test.demo.entity.Status).CANCELED}"> Order is canceled </span>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/status-log/{id}(id=${order.id})}" class="col-md-1">
+                                    <button type="button" class="btn btn-success" th:text="History">History</button>
+                                </a>
                             </td>
                         </tr>
                     </tbody>
