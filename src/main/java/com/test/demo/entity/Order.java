@@ -120,4 +120,11 @@ public class Order {
 		this.status = status;
 	}
 
+	public boolean checkOrderItems(){
+		for (OrderItem o : orderItems){
+			o.getProduct().getId();
+		}
+		return true;
+	}
+
 }

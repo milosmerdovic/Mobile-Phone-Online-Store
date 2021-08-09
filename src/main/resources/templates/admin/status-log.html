@@ -21,7 +21,10 @@
                                 <td th:text="${orderStatus.dateTime}"></td>
                             </tr>    
                         </tbody>
-                    </table>    
+                    </table>   
+                    <a th:href="@{/orders/back}" class="col-md-1">
+                        <button type="button" class="btn btn-danger" th:text="Back">Back</button>
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
 package com.test.demo.service;
 
-
 import java.util.Optional;
 
 import com.test.demo.entity.Product;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductServiceImpl implements ProductService{
-    
+
     private final ProductRepository productRepository;
 
     @Autowired
@@ -23,5 +22,4 @@ public class ProductServiceImpl implements ProductService{
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
-    
 }

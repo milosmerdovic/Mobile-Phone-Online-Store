@@ -2,6 +2,7 @@ package com.test.demo.controllers;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.demo.entity.Order;
+import com.test.demo.entity.OrderItem;
 import com.test.demo.entity.Product;
 import com.test.demo.entity.Status;
 import com.test.demo.entity.StatusHistory;
+import com.test.demo.repository.OrderItemsRepository;
 import com.test.demo.repository.OrderRepository;
 import com.test.demo.repository.ProductRepository;
 import com.test.demo.repository.StatusHistoryRepository;
@@ -28,17 +32,21 @@ import com.test.demo.upload.FileUpload;
 @Controller
 public class AdminController {
     
+    private static final String DELETE_MESSAGE = "Can't delete product, it's already in order";
+    
     @Autowired
 	private final ProductRepository productRepository;
     @Autowired
 	private final OrderRepository orderRepository;
-        
+    @Autowired
+    private final OrderItemsRepository orderItemsRepository; 
     @Autowired
     private final StatusHistoryRepository historyRepository;
 	
 	@Autowired
-	public AdminController(ProductRepository productRepository, OrderRepository orderRepository, StatusHistoryRepository historyRepository) {
-		this.orderRepository = orderRepository;
+	public AdminController(OrderItemsRepository orderItemsRepository, ProductRepository productRepository, OrderRepository orderRepository, StatusHistoryRepository historyRepository) {
+		this.orderItemsRepository = orderItemsRepository;
+        this.orderRepository = orderRepository;
 		this.productRepository = productRepository;
         this.historyRepository = historyRepository;
 	}
@@ -53,7 +61,12 @@ public class AdminController {
 	public String goBackButton() {
 		return "redirect:/admin";
 	}
-	
+
+    @GetMapping("/orders/back")
+	public String backToOrders() {
+		return "redirect:/admin/orders";
+	}
+    
 	@GetMapping("/admin/add-item")
 	public String showAddItemForm(Product product) {
 		return "admin/add-item";
@@ -101,13 +114,17 @@ public class AdminController {
     }
     
 	@GetMapping("/admin/delete/{id}")
-    public String deleteProduct(@PathVariable("id") long id, Model model) {
+    public String deleteProduct(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
         Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        /*
+        List <OrderItem> orderedProduct;
+        orderedProduct = orderItemsRepository.findByProduct(product);
 
-            napraviti metodu koja otkazuje brisanje proizvoda u slucaju da postoji u porudzbini
-        
-            */
+        for(OrderItem p : orderedProduct){
+            if(product.equals(p.getProduct())){
+                redirectAttributes.addFlashAttribute("delete_message", DELETE_MESSAGE);
+                return "redirect:/admin";
+            }
+        }
         productRepository.delete(product);
         model.addAttribute("AllProducts", productRepository.findAll());
         return "redirect:/admin";

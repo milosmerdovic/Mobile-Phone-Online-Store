@@ -27,9 +27,6 @@
                             </div>
     							<ul class="nav-bar">
     								<li><a th:href="@{/}">Home</a></li>
-	    							<li><a th:href="@{/login}">Log in</a></li>
-	    							<li><a th:href="@{/logout}">Log out</a></li>
-	    							<li sec:authorize="hasRole(ADMIN)"><a th:href="@{/admin}">Admin</a></li>
     							</ul>
                     </div>
                 </div>

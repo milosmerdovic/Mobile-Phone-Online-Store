@@ -44,7 +44,6 @@
                     <thead>
                         <tr>
                             <th>Order Number</th>
-                            <th>Date</th>
                             <th>Name</th>
                             <th>Last Name</th>
                             <th>Address</th>
@@ -59,14 +58,15 @@
                     <tbody>
                         <tr th:each="order : ${orders}">
                             <td th:text="${order.id}"></td>
-                            <td th:text="${order.createdAt}"></td>
                             <td th:text="${order.customerName}"></td>
                             <td th:text="${order.customerLastName}"></td>
                             <td th:text="${order.customerAddress}"></td>
                             <td th:text="${order.customerEmail}"></td>
-                            <td th:each="item : ${order.orderItems}">
-                                <p>Product Name: <span th:text="${item.getProduct().getName()}"></span></p></br>
-                                <p>Quantity: <span th:text="${item.getQty()}"></span></p>
+                            <td>
+                                <span th:each="item : ${order.orderItems}">
+                                    <p>Product: <span th:text="${item.getProduct().getName()}"></span></p>
+                                    <p>Quantity: <span th:text="${item.getQty()}"></span></p>
+                                </span>
                             </td>
                             <td th:text="${order.total}"></td>
                             <td th:text="${order.status}"></td>

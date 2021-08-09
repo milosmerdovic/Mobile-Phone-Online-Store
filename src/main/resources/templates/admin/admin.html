@@ -7,6 +7,8 @@
 <body>
 
     <div th:replace="fragments/header :: navbar"></div>
+    <div class="alert alert-info" role="alert" style="text-align: center;" th:if="${delete_message}" th:text="${delete_message}" />
+
     <h2 style="text-align:center; padding: 20px;">Admin</h2>
 
     <div class="navigation-panel" style="text-align: center;">
