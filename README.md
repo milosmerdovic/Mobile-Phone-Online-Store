@@ -26,6 +26,11 @@ Users can shop for products. Each user has his own shopping cart (session functi
 ## How To Run
 * Once the app starts, go to the web browser and visit `http://localhost:8080/` , `http://localhost:8080/home` or `http://localhost:8080/index`
 
+* For accessing **Administraor** page visit `http://localhost:8080/admin`. Spring Security will request login to pass on page.
+  user name = admin
+  password = admin123
+
+
 #### **MAVEN**
 * Open a terminal and run the following commands to ensure that you have valid versions of Java and Maven installed:
 ````
